@@ -74,7 +74,26 @@ export default class Navigation extends Component {
                         onLongPress: () => this.changeScene('themes')
                     }]}
                 />
-            </Drawer>
+
+                <Drawer.Section
+                    title="Restaurant Section"
+                    items={[{
+                        icon: 'settings',
+                        value: 'Login',
+                        active: route === 'login',
+                        onPress: () => this.changeScene('login'),
+                        onLongPress: () => this.changeScene('login')
+                    },
+                    {
+                      icon: 'settings',
+                      value: 'Login',
+                      active: route === 'login',
+                      onPress: () => this.changeScene('login'),
+                      onLongPress: () => this.changeScene('login')
+                    }
+                  ]}
+                />
+              </Drawer>
         );
     }
 }

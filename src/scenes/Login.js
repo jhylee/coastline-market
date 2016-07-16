@@ -1,5 +1,6 @@
-import React, { Component, View, Image } from 'react-native';
-import { Avatar, Subheader, COLOR, IconToggle, Icon } from 'react-native-material-design';
+import React, { Component, View, PropTypes, Image, Text, TextInput } from 'react-native';
+import { Avatar, Subheader, COLOR, IconToggle, Icon, Button, Card } from 'react-native-material-design';
+import AppStore from '../stores/AppStore';
 
 export default class Login extends Component {
 
@@ -10,128 +11,48 @@ export default class Login extends Component {
 			badgeTwo: 6,
 			badgeThree: 9
 		};
-
 	}
+	static contextTypes = {
+			navigator: PropTypes.object.isRequired
+	};
 
 	incrementBadge = (badge) => {
 		this.setState({[badge]: this.state[badge] + 1});
 	};
 
 	render() {
+		const { navigator } = this.context;
+		const theme = AppStore.getState().theme;
+
 		return (
 			<View>
-				<Subheader text="Icons"/>
-				<View style={styles.avatarContainer}>
-					<IconToggle color="paperGrey900">
-						<Icon
-							name="business"
-							color="paperGrey900"
-							style={styles.icon}
-						/>
-					</IconToggle>
-					<IconToggle color="paperGrey900">
-						<Icon
-							name="call"
-							color="paperGrey900"
-							style={styles.icon}
-						/>
-					</IconToggle>
-					<IconToggle color="paperGrey900">
-						<Icon
-							name="call-made"
-							color="paperGrey900"
-							style={styles.icon}
-						/>
-					</IconToggle>
-				</View>
-				<Subheader text="Icons with Color"/>
-				<View style={styles.avatarContainer}>
-					<IconToggle color="paperRed">
-						<Icon
-							name="chat"
-							color="paperRed"
-							style={styles.icon}
-						/>
-					</IconToggle>
-					<IconToggle color="paperBrown">
-						<Icon
-							name="clear-all"
-							color="paperBrown"
-							style={styles.icon}
-						/>
-					</IconToggle>
-					<IconToggle color="paperOrange">
-						<Icon
-							name="location-on"
-							color="paperOrange"
-							style={styles.icon}
-						/>
-					</IconToggle>
-				</View>
-				<Subheader text="Contrasting Icons"/>
-				<View style={styles.avatarContainer}>
-					<IconToggle color="googleBlue">
-						<Icon
-							name="present-to-all"
-							color="paperGrey"
-							style={styles.icon}
-						/>
-					</IconToggle>
-					<IconToggle color="paperPink">
-						<Icon
-							name="speaker-phone"
-							color="paperTeal"
-							style={styles.icon}
-						/>
-					</IconToggle>
-					<IconToggle color="paperAmber">
-						<Icon
-							name="swap-calls"
-							color="paperRed"
-							style={styles.icon}
-						/>
-					</IconToggle>
-				</View>
-				<Subheader text="Icons with a badge"/>
-				<View style={styles.avatarContainer}>
-					<IconToggle
-						color="paperGrey900"
-						badge={{ value: this.state.badgeOne }}
-						onPress={() => { this.incrementBadge('badgeOne') }}>
-						<Icon
-							name="forum"
-							color="paperGrey900"
-							style={styles.icon}
-						/>
-					</IconToggle>
-					<IconToggle
-						color="paperGrey900"
-						badge={{
-                            value: this.state.badgeTwo,
-                            backgroundColor: '#000000'
-                        }}
-						onPress={() => { this.incrementBadge('badgeTwo') }}>
-						<Icon
-							name="import-export"
-							color="paperGrey900"
-							style={styles.icon}
-						/>
-					</IconToggle>
-					<IconToggle
-						color="paperGrey900"
-						badge={{
-                            value: this.state.badgeThree,
-                            backgroundColor: '#ffffff',
-                            textColor: '#000000'
-                        }}
-						onPress={() => { this.incrementBadge('badgeThree') }}>
-						<Icon
-							name="shopping-cart"
-							color="paperGrey900"
-							style={styles.icon}
-						/>
-					</IconToggle>
-				</View>
+			<Card>
+						<Card.Body>
+							<View style={styles.row}>
+							<TextInput
+	               name="email"
+	               style={styles.textInput}
+								 keyboardType="email-address"
+	               placeholder={'Username (Email)'} />
+							</View>
+							<View style={styles.row}>
+							<TextInput
+								 name="password"
+								 style={styles.textInput}
+								 secureTextEntry={true}
+								 placeholder={'Your Password'} />
+							</View>
+						</Card.Body>
+						<Card.Actions position="middle">
+						<Button value="I'm a Fisher" primary={theme} />
+						<Button value="I'm a Restaurant" overrides={{textColor: 'E0E0E0'}}/>
+						<Button value="I'm a Deliverer" overrides={{textColor: 'E0E0E0'}}/>
+
+						</Card.Actions>
+			</Card>
+					<View style={{flexDirection: 'column', flex: 1}}>
+						<Button value="SIGN UP/LOG IN" onPress={() => { navigator.forward() }} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
+					</View>
 			</View>
 		);
 	}
@@ -139,12 +60,33 @@ export default class Login extends Component {
 
 const styles = {
 	avatarContainer: {
-		flexDirection: 'row',
+		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		paddingHorizontal: 16
 	},
+	rowContainer: {
+		flexDirection: 'row',
+		flex: 1,
+		marginTop: 10,
+		backgroundColor: '#455A64',
+		elevation: 1
+	},
 	icon: {
-		margin: 16
+		margin: 8,
+		flex: 0.2
+	},
+	textInput: {
+		color: '#455A64',
+		paddingTop: 5,
+		paddingBottom: 5,
+		paddingLeft: 15,
+		margin: 0,
+		borderRadius: 10,
+		marginLeft: 0,
+		marginRight: 0,
+		fontSize: 15,
+		height: 50,
+		borderRadius: 2
 	}
 };

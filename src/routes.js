@@ -1,11 +1,22 @@
 export default {
 
-    welcome: {
-      initialRoute: true,
 
+    login: {
+      initialRoute: true,
+      title: 'Login',
+      component:require('./scenes/Login').default,
+
+      children: {
+          welcome: {
+              component: require('./scenes/Welcome').default
+          },
+
+      }
+    },
+
+    welcome: {
         title: 'Coastline Market',
         component: require('./scenes/Welcome').default,
-
 
         children: {
             example: {
