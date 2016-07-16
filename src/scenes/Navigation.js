@@ -62,7 +62,7 @@ export default class Navigation extends Component {
                     items={[{
                         icon: 'settings',
                         value: 'Settings',
-                        active: route === 'avatars',
+                        active: route === 'list',
                         onPress: () => this.changeScene('avatars'),
                         onLongPress: () => this.changeScene('avatars')
                     },
@@ -74,8 +74,6 @@ export default class Navigation extends Component {
                         onLongPress: () => this.changeScene('themes')
                     }]}
                 />
-
-
             </Drawer>
         );
     }

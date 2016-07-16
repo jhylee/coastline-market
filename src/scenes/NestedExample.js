@@ -1,15 +1,21 @@
-import React, { Component, ScrollView, View, Text, WebView, Image } from 'react-native';
+import React, { Component, ScrollView, View, Text, WebView, Image, TouchableHighlight, PropTypes } from 'react-native';
 import { Button, Card, Divider, COLOR, TYPO, Icon  } from 'react-native-material-design';
+import AppStore from '../stores/AppStore';
 
 
 export default class Avatars extends Component {
 
+  static contextTypes = {
+      navigator: PropTypes.object.isRequired
+  };
 
     render() {
+      const theme = AppStore.getState().theme;
+      const { navigator } = this.context;
+
 
         return (
           <ScrollView>
-
               <View>
               <Card>
                     <Card.Body>
@@ -29,30 +35,27 @@ export default class Avatars extends Component {
                     <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right', fontWeight: '500'}}>$864.78</Text>
                     </View>
                     <Card.Actions position="right">
-                    <Button value="VIEW INVOICE DETAILS"/>
+                    <Button value="VIEW INVOICE DETAILS" primary={theme}/>
                     </Card.Actions>
               </Card>
-
-
-
               <Card>
                     <Card.Media
-                          image={<Image source={require('./../img/welcome.png')} />}
+                          image={<Image source={require('./../img/welcome.png')}/>}
                           overlay>
                           <Text style={[TYPO.paperSubhead, COLOR.paperGrey50]}>Deliver to ZipCar at Dock 3, Steveston Harbour</Text>
                     </Card.Media>
                     <Card.Actions position="right">
                     <View style ={{paddingTop: 10, paddingLeft: 5}}>
                     </View>
-                    <Button value="GET MAP DIRECTIONS" />
+                    <Button value="GET MAP DIRECTIONS" primary={theme}  />
                     </Card.Actions>
               </Card>
               <View style={{flexDirection: 'row'}}>
                 <View style={{flexDirection: 'column', flex: 0.5}}>
-                  <Button style={{flexDirection: 'column', flex: 1}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} onPress={()=> {navigator.back()}} raised={true}/>
+                  <Button style={{flexDirection: 'column', flex: 1}} onPress={()=> {navigator.back()}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} raised={true}/>
                 </View>
                 <View style={{flexDirection: 'column', flex: 0.5}}>
-                  <Button value="CONFIRM" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}}  onPress={()=> {navigator.back()}} raised={true}/>
+                  <Button value="ACCEPT" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}}  raised={true}/>
                 </View>
               </View>
            </View>

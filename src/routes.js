@@ -1,10 +1,11 @@
 export default {
 
     welcome: {
-        initialRoute: true,
+      initialRoute: true,
 
         title: 'Coastline Market',
         component: require('./scenes/Welcome').default,
+
 
         children: {
             example: {
@@ -20,9 +21,15 @@ export default {
     },
 
     buttons: {
-
         title: 'Reserved Orders',
-        component: require('./scenes/Buttons').default
+        component: require('./scenes/Buttons').default,
+
+        children: {
+            example: {
+                 title: 'My Order', // optional
+                component: require('./scenes/RadioButtons').default
+            }
+        }
     },
 
     checkboxes: {

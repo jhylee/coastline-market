@@ -26,7 +26,12 @@ export default class Welcome extends Component {
 
               <Card>
                 <Card.Body>
-                  <Text style={{fontSize:20}}>Pacific Cod, 150lbs</Text>
+                <View style={styles.column}>
+                  <View style={styles.row}>
+                    <Text style={{fontSize:20, flex:0.7}}>Pacific Cod, 150lbs</Text>
+                    <Text style={{fontSize:12, flex:0.3, textAlign: 'right'}}>June 4 / 13:10</Text>
+                  </View>
+                </View>
                   <Text>Delivery Zone: Steveston Harbour</Text>
                   <Text >Order Requested for 150lbs of Pacific Cod.</Text>
                 </Card.Body>
@@ -74,3 +79,13 @@ export default class Welcome extends Component {
     }
 
 }
+const styles = {
+	column: {
+		flexDirection: 'column',
+    flex: 1
+	},
+  row: {
+    flexDirection: 'row',
+    flex: 1
+  }
+};
