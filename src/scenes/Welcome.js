@@ -34,6 +34,14 @@ export default class Welcome extends Component {
                         zone: "Steveston Harbour",
                      },
                   ];
+
+                  function dateToString(date) {
+                     var string = date.toString().split(" ");
+                     string = string[0] + " " + string[1] + " " + string[2] + ", " + string[4];
+
+                     return string;
+                  }
+
                   // TODO date format
                   return sample_data.map(function(member) {
                      return (
@@ -41,8 +49,8 @@ export default class Welcome extends Component {
                            <Card.Body>
                               <View style={styles.column}>
                                  <View style={styles.row}>
-                                    <Text style={{fontSize:20, flex:0.7}}>{member.name + ", " + member.weight + member.units}</Text>
-                                    <Text style={{fontSize:12, flex:0.3, textAlign: 'right'}}>{member.date.toString()}</Text>
+                                    <Text style={{fontSize:20, flex:0.7}}> {member.name + ", " + member.weight + member.units} </Text>
+                                    <Text style={{fontSize:12, flex:0.3, textAlign: 'right'}}> {dateToString(member.date)} </Text>
                                  </View>
                               </View>
                               <Text> Delivery Zone: {member.zone} </Text>
