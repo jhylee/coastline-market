@@ -89,6 +89,11 @@ export default {
       component: require('./scenes/OrderHistory').default
     },
 
+    payment: {
+      title: 'Payment',
+      component: require('./scenes/Payment').default
+    },
+
     // Restaurant Pages
     restaurants: {
       title: 'Restaurant Order',

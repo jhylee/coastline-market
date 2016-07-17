@@ -39,7 +39,7 @@ export default class Navigation extends Component {
                 </Drawer.Header>
 
                 <Drawer.Section
-                    title="Coastline Orders"
+                    title="Fisher Section"
                     items={[{
                         icon: 'local-offer',
                         value: 'Available Orders',
@@ -54,42 +54,43 @@ export default class Navigation extends Component {
                         label: '8',
                         onPress: () => this.changeScene('buttons'),
                         onLongPress: () => this.changeScene('buttons')
+                    }, {
+                      icon: 'settings',
+                      value: 'Settings',
+                      active: route === 'list',
+                      onPress: () => this.changeScene('avatars'),
+                      onLongPress: () => this.changeScene('avatars')
+                    }, {
+                      icon: 'palette',
+                      value: 'Application Theme',
+                      active: route === 'themes',
+                      onPress: () => this.changeScene('themes'),
+                      onLongPress: () => this.changeScene('themes')
                     }]}
                 />
 
-                <Drawer.Section
-                    title="Settings"
-                    items={[{
-                        icon: 'settings',
-                        value: 'Settings',
-                        active: route === 'list',
-                        onPress: () => this.changeScene('avatars'),
-                        onLongPress: () => this.changeScene('avatars')
-                    },
-                    {
-                        icon: 'palette',
-                        value: 'Application Theme',
-                        active: route === 'themes',
-                        onPress: () => this.changeScene('themes'),
-                        onLongPress: () => this.changeScene('themes')
-                    }]}
-                />
 
                 <Drawer.Section
                     title="Restaurant Section"
                     items={[{
-                        icon: 'settings',
-                        value: 'Available Orders',
+                        icon: 'whatshot',
+                        value: 'Make an Order',
                         active: route === 'restaurants',
                         onPress: () => this.changeScene('restaurants'),
                         onLongPress: () => this.changeScene('restaurants')
                     },
                     {
-                      icon: 'settings',
-                      value: 'Order History',
+                      icon: 'history',
+                      value: 'Order',
                       active: route === 'orderhistory',
                       onPress: () => this.changeScene('orderhistory'),
                       onLongPress: () => this.changeScene('orderhistory')
+                    }, {
+                      icon: 'payment',
+                      value: 'Payment',
+                      active: route === 'payment',
+                      onPress: () => this.changeScene('payment'),
+                      onLongPress: () => this.changeScene('payment')
                     }
                   ]}
                 />
