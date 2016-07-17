@@ -7,22 +7,29 @@ export default {
 
       children: {
           welcome: {
-              component: require('./scenes/Welcome').default
-          },
+              title: 'Coastline Market',
+              component: require('./scenes/Welcome').default,
+              children: {
+                  example: {
+                       title: 'Order Details', // optional
+                      component: require('./scenes/NestedExample').default
+                  }
+              }
+          }
       }
     },
 
     welcome: {
-        title: 'Coastline Market',
-        component: require('./scenes/Welcome').default,
-
-        children: {
-            example: {
-                 title: 'Order Details', // optional
-                component: require('./scenes/NestedExample').default
-            }
-        }
+      title: 'Coastline Market',
+      component: require('./scenes/Welcome').default,
+      children: {
+          example: {
+               title: 'Order Details', // optional
+              component: require('./scenes/NestedExample').default
+          }
+      }
     },
+
 
     avatars: {
         title: 'Settings',
@@ -77,6 +84,11 @@ export default {
         component: require('./scenes/Themes').default
     },
 
+    orderhistory: {
+      title: 'Order history',
+      component: require('./scenes/OrderHistory').default
+    },
+
     // Restaurant Pages
     restaurants: {
       title: 'Restaurant Order',
@@ -84,14 +96,23 @@ export default {
 
       children: {
           product: {
+              title: 'Product Details',
               component: require('./scenes/ProductDetail').default,
               children: {
                 cart: {
-                  title: 'Your Cart',
-                  component: require('./scenes/Cart').default
+                    title: 'Your Cart',
+                    component: require('./scenes/Cart').default,
+
+                    children: {
+                      route: {
+                        title: 'Order #XAGAEWR',
+                        component: require('./scenes/Route').default,
+                      }
+                    }
                 }
               }
-          },
+
+          }
       }
 
     }

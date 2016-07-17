@@ -1,5 +1,5 @@
 import React, { Component, View, ScrollView, PropTypes, Image, Text, TextInput } from 'react-native';
-import { Avatar, Divider, COLOR, IconToggle, Icon, Button, Card } from 'react-native-material-design';
+import { Avatar, Divider, COLOR, TYPO, IconToggle, Icon, Button, Card } from 'react-native-material-design';
 import AppStore from '../stores/AppStore';
 
 export default class AvailableOrders extends Component {
@@ -28,68 +28,46 @@ export default class AvailableOrders extends Component {
 			<ScrollView>
 			<Card>
 					<Card.Media
-						image={<Image source={require('./../img/salmon.jpg')}/>}
+						image={<Image source={require('./../img/welcome.png')}/>}
 						overlay>
+            <Text style={[TYPO.paperSubhead, COLOR.paperGrey50]}>Delivering To 60 Harbord St, Toronto ON</Text>
 					</Card.Media>
 
 						<Card.Body>
 						<View style={styles.column}>
 							<View style={styles.row}>
-								<Text style={{fontSize:20, flex:0.7, fontWeight: '500'}}>Pacific Salmon</Text>
-								<Text style={{fontSize:16, flex:0.3, textAlign: 'right', fontWeight: '500'}}>$3.99/lb</Text>
+              <TextInput
+                 name="note"
+                 style={styles.textInput}
+                 placeholder={'Add delivery note...'} />
 							</View>
 							<View style={styles.row}>
-								<Text style={{fontSize:13, flex:0.5}}>Caught 6/15/2016</Text>
-								<Text style={{fontSize:13, flex:0.5, textAlign: 'right'}}>Steveston Fish Wharf</Text>
+								<Text style={{fontSize:13, flex:0.5}}>Pacific Salmon x 400lbs</Text>
+								<Text style={{fontSize:13, flex:0.5, textAlign: 'right'}}>$159.12</Text>
 							</View>
+              <View style={styles.row}>
+                <Text style={{fontSize:13, flex:0.5}}>Subtotal</Text>
+                <Text style={{fontSize:13, flex:0.5, textAlign: 'right'}}>$159.12</Text>
+              </View>
+              <View style={styles.row}>
+                <Text style={{fontSize:13, flex:0.5}}>Tax</Text>
+                <Text style={{fontSize:13, flex:0.5, textAlign: 'right'}}>$4.01</Text>
+              </View>
+              <View style={styles.row}>
+                <Text style={{fontSize:13, flex:0.5}}>Delivery Fee</Text>
+                <Text style={{fontSize:13, flex:0.5, textAlign: 'right'}}>$10</Text>
+              </View>
+              <Divider/>
+              <View style={styles.row}>
+                <Text style={{fontSize:13, flex:0.5, fontWeight: '500'}}>Total</Text>
+                <Text style={{fontSize:13, flex:0.5, fontWeight: '500', textAlign: 'right'}}>$189.12</Text>
+              </View>
 						</View>
 					</Card.Body>
 
 			</Card>
-			<View style={{backgroundColor:'#E0E0E0', margin: 5, borderRadius: 2, elevation: 1, paddingHorizontal: 15, flexDirection: 'column', flex: 2}}>
-				<View style={styles.column}>
-					<View style={styles.row}>
-						<Icon
-							name="schedule"
-							color="paperGrey900"
-							style={styles.icon}
-							size={15}
-							/>
-							<Text style={{flex: 1.6, marginTop: 2, textAlign: 'left'}}>Delivery between 5PM - 9PM</Text>
-					</View>
-				</View>
-			</View>
 
-			<View style={{backgroundColor:'#FFF', margin: 5, borderRadius: 2, elevation: 1, paddingHorizontal: 20}}>
-						<View style={styles.column}>
-							<View style={styles.row}>
-						<TextInput
-							 name="quantity"
-							 keyboardType="numeric"
-							 style={styles.textInput}
-							 placeholder={'Desired Quantity'} />
-							 <Text style={{flex:0.2, marginLeft: 10, marginTop: 15, fontSize: 16}}>Lbs</Text>
-							 </View>
-							 </View>
-
-						<Divider/>
-						<View style={styles.column}>
-						<View style={styles.row}>
-							<Text style={{flex:0.3, textAlign:'left', fontSize: 13}}>Tax</Text>
-							<Text style={{flex:0.7, textAlign:'right', fontSize: 13}}>$10.15</Text>
-						</View>
-						<View style={styles.row}>
-							<Text style={{flex:0.3, textAlign:'left', fontSize: 13}}>Delivery</Text>
-							<Text style={{flex:0.7, textAlign:'right', fontSize: 13}}>$10.00</Text>
-						</View>
-							<View style={styles.row}>
-								<Text style={{flex:0.3, textAlign:'left', fontSize: 16, fontWeight: '500'}}>Total</Text>
-								<Text style={{flex:0.7, textAlign:'right', fontSize: 16, fontWeight: '500'}}>$160.15</Text>
-							</View>
-						</View>
-
-			</View>
-			<Button onPress={()=> {navigator.forward()}} value="ADD TO CART		($160.15)" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
+			<Button onPress={()=> {navigator.forward()}} value="CHECKOUT" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
 
 			</ScrollView>
 		);

@@ -86,10 +86,10 @@ export default class Navigation extends Component {
                     },
                     {
                       icon: 'settings',
-                      value: 'Login',
-                      active: route === 'login',
-                      onPress: () => this.changeScene('login'),
-                      onLongPress: () => this.changeScene('login')
+                      value: 'Order History',
+                      active: route === 'orderhistory',
+                      onPress: () => this.changeScene('orderhistory'),
+                      onLongPress: () => this.changeScene('orderhistory')
                     }
                   ]}
                 />

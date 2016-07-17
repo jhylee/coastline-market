@@ -29,6 +29,7 @@ export default class AvailableOrders extends Component {
 			<Card>
 					<Card.Media
 						image={<Image source={require('./../img/salmon.jpg')}/>}
+						height= {120}
 						overlay>
 					</Card.Media>
 
@@ -44,8 +45,8 @@ export default class AvailableOrders extends Component {
 							</View>
 						</View>
 					</Card.Body>
-
 			</Card>
+
 			<View style={{backgroundColor:'#E0E0E0', margin: 5, borderRadius: 2, elevation: 1, paddingHorizontal: 15, flexDirection: 'column', flex: 2}}>
 				<View style={styles.column}>
 					<View style={styles.row}>
@@ -68,10 +69,10 @@ export default class AvailableOrders extends Component {
 							 keyboardType="numeric"
 							 style={styles.textInput}
 							 placeholder={'Desired Quantity'} />
-							 <Text style={{flex:0.2, marginLeft: 10, marginTop: 15, fontSize: 16}}>Lbs</Text>
+							 <Text style={{flex:0.1, marginLeft: 10, marginTop: 15, fontSize: 16}}>Lbs</Text>
 							 </View>
 							 </View>
-
+{/*
 						<Divider/>
 						<View style={styles.column}>
 						<View style={styles.row}>
@@ -87,8 +88,9 @@ export default class AvailableOrders extends Component {
 								<Text style={{flex:0.7, textAlign:'right', fontSize: 16, fontWeight: '500'}}>$160.15</Text>
 							</View>
 						</View>
-
+			*/}
 			</View>
+
 			<Button onPress={()=> {navigator.forward()}} value="ADD TO CART		($160.15)" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
 
 			</ScrollView>
@@ -129,7 +131,7 @@ const styles = {
 		fontSize: 15,
 		height: 50,
 		borderRadius: 2,
-		flex: 0.8
+		flex: 0.9
 	},
 	column: {
 		flexDirection: 'column',

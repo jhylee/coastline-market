@@ -41,6 +41,7 @@ export default class Avatars extends Component {
               <Card>
                     <Card.Media
                           image={<Image source={require('./../img/welcome.png')}/>}
+                          height= {200}
                           overlay>
                           <Text style={[TYPO.paperSubhead, COLOR.paperGrey50]}>Deliver to ZipCar at Dock 3, Steveston Harbour</Text>
                     </Card.Media>
