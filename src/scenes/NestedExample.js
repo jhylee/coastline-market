@@ -52,7 +52,7 @@ export default class Avatars extends Component {
               </Card>
               <View style={{flexDirection: 'row'}}>
                 <View style={{flexDirection: 'column', flex: 0.5}}>
-                  <Button style={{flexDirection: 'column', flex: 1}} onPress={()=> {navigator.back()}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} raised={true}/>
+                  <Button onPress={()=> {navigator.back()}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} raised={true}/>
                 </View>
                 <View style={{flexDirection: 'column', flex: 0.5}}>
                   <Button value="ACCEPT" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}}  raised={true}/>

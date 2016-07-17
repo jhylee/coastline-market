@@ -43,11 +43,10 @@ export default class Login extends Component {
 								 placeholder={'Your Password'} />
 							</View>
 						</Card.Body>
-						<Card.Actions position="middle">
-						<Button value="I'm a Fisher" primary={theme} />
-						<Button value="I'm a Restaurant" overrides={{textColor: 'E0E0E0'}}/>
-						<Button value="I'm a Deliverer" overrides={{textColor: 'E0E0E0'}}/>
-
+						<Card.Actions position="right">
+							<Button value="Fisher" primary={theme} />
+							<Button value="Restaurant" overrides={{textColor: 'E0E0E0'}}/>
+							<Button value="Deliverer" overrides={{textColor: 'E0E0E0'}}/>
 						</Card.Actions>
 			</Card>
 					<View style={{flexDirection: 'column', flex: 1}}>

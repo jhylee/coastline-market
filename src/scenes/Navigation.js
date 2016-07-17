@@ -79,10 +79,10 @@ export default class Navigation extends Component {
                     title="Restaurant Section"
                     items={[{
                         icon: 'settings',
-                        value: 'Login',
-                        active: route === 'login',
-                        onPress: () => this.changeScene('login'),
-                        onLongPress: () => this.changeScene('login')
+                        value: 'Available Orders',
+                        active: route === 'restaurants',
+                        onPress: () => this.changeScene('restaurants'),
+                        onLongPress: () => this.changeScene('restaurants')
                     },
                     {
                       icon: 'settings',

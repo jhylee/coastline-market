@@ -1,7 +1,7 @@
 import React, { Component, View } from 'react-native';
 import { Subheader, Divider } from 'react-native-material-design';
 
-export default class Dividers extends Component {
+export default class Cart extends Component {
 
     render() {
         return (

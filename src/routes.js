@@ -1,6 +1,5 @@
 export default {
-
-
+    // Fishery Pages
     login: {
       initialRoute: true,
       title: 'Login',
@@ -10,7 +9,6 @@ export default {
           welcome: {
               component: require('./scenes/Welcome').default
           },
-
       }
     },
 
@@ -65,7 +63,6 @@ export default {
     },
 
     'radio-buttons': {
-
         title: 'Radio Buttons',
         component: require('./scenes/RadioButtons').default
     },
@@ -78,5 +75,25 @@ export default {
     themes: {
         title: 'Change Theme',
         component: require('./scenes/Themes').default
+    },
+
+    // Restaurant Pages
+    restaurants: {
+      title: 'Restaurant Order',
+      component: require('./scenes/AvailableOrders').default,
+
+      children: {
+          product: {
+              component: require('./scenes/ProductDetail').default,
+              children: {
+                cart: {
+                  title: 'Cart',
+                  component: require('./scenes/Cart').default
+                }
+              }
+          },
+      }
+
     }
+
 }
