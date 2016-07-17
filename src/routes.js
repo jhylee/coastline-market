@@ -87,7 +87,7 @@ export default {
               component: require('./scenes/ProductDetail').default,
               children: {
                 cart: {
-                  title: 'Cart',
+                  title: 'Your Cart',
                   component: require('./scenes/Cart').default
                 }
               }
