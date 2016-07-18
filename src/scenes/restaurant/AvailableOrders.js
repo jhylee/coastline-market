@@ -1,6 +1,6 @@
 import React, { Component, View, ScrollView, PropTypes, Image, Text, TextInput } from 'react-native';
 import { Avatar, Subheader, COLOR, IconToggle, Icon, Button, Card } from 'react-native-material-design';
-import AppStore from '../stores/AppStore';
+import AppStore from '../../stores/AppStore';
 
 export default class AvailableOrders extends Component {
 
@@ -34,7 +34,7 @@ export default class AvailableOrders extends Component {
 			</View>
 			<Card>
 						<Card.Media
-									image={<Image source={require('./../img/salmon.jpg')}/>}
+									image={<Image source={require('./../../img/salmon.jpg')}/>}
 									overlay>
 						</Card.Media>
 						<Card.Body>
@@ -53,7 +53,7 @@ export default class AvailableOrders extends Component {
 			</Card>
 			<Card>
 						<Card.Media
-									image={<Image source={require('./../img/salmon.jpg')}/>}
+									image={<Image source={require('./../../img/salmon.jpg')}/>}
 									overlay>
 						</Card.Media>
 						<Card.Body>
@@ -72,7 +72,7 @@ export default class AvailableOrders extends Component {
 			</Card>
 			<Card>
 						<Card.Media
-									image={<Image source={require('./../img/salmon.jpg')}/>}
+									image={<Image source={require('./../../img/salmon.jpg')}/>}
 									overlay>
 						</Card.Media>
 						<Card.Body>

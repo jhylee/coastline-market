@@ -1,15 +1,20 @@
-import React, { Component, ScrollView, View, Text, WebView, Image, TouchableHighlight } from 'react-native';
+import React, { Component, ScrollView, View, Text, WebView, Image, TouchableHighlight, PropTypes } from 'react-native';
 import { Button, Card, Divider, COLOR, TYPO, Icon  } from 'react-native-material-design';
-import AppStore from '../stores/AppStore';
+import AppStore from '../../stores/AppStore';
 
 
-export default class Avatars extends Component {
+export default class ProductDetail extends Component {
+
+  static contextTypes = {
+      navigator: PropTypes.object.isRequired
+  };
 
     render() {
       const theme = AppStore.getState().theme;
+      const { navigator } = this.context;
+
 
         return (
-
           <ScrollView>
               <View>
               <Card>
@@ -35,17 +40,25 @@ export default class Avatars extends Component {
               </Card>
               <Card>
                     <Card.Media
-                          image={<Image source={require('./../img/welcome.png')}/>}
+                          image={<Image source={require('./../../img/welcome.png')}/>}
+                          height= {200}
                           overlay>
                           <Text style={[TYPO.paperSubhead, COLOR.paperGrey50]}>Deliver to ZipCar at Dock 3, Steveston Harbour</Text>
                     </Card.Media>
                     <Card.Actions position="right">
                     <View style ={{paddingTop: 10, paddingLeft: 5}}>
                     </View>
-                    <Button value="GET MAP DIRECTIONS" primary={theme} />
+                    <Button value="GET MAP DIRECTIONS" primary={theme}  />
                     </Card.Actions>
               </Card>
-
+              <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'column', flex: 0.5}}>
+                  <Button onPress={()=> {navigator.back()}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} raised={true}/>
+                </View>
+                <View style={{flexDirection: 'column', flex: 0.5}}>
+                  <Button value="ACCEPT" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}}  raised={true}/>
+                </View>
+              </View>
            </View>
            </ScrollView>
         );

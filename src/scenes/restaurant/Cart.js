@@ -1,6 +1,6 @@
 import React, { Component, View, ScrollView, PropTypes, Image, Text, TextInput } from 'react-native';
 import { Avatar, Divider, COLOR, TYPO, IconToggle, Icon, Button, Card } from 'react-native-material-design';
-import AppStore from '../stores/AppStore';
+import AppStore from '../../stores/AppStore';
 
 export default class AvailableOrders extends Component {
 
@@ -28,7 +28,7 @@ export default class AvailableOrders extends Component {
 			<ScrollView>
 			<Card>
 					<Card.Media
-						image={<Image source={require('./../img/welcome.png')}/>}
+						image={<Image source={require('./../../img/welcome.png')}/>}
 						overlay>
             <Text style={[TYPO.paperSubhead, COLOR.paperGrey50]}>Delivering To 60 Harbord St, Toronto ON</Text>
 					</Card.Media>

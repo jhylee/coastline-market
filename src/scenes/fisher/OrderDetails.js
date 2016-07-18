@@ -1,20 +1,15 @@
-import React, { Component, ScrollView, View, Text, WebView, Image, TouchableHighlight, PropTypes } from 'react-native';
+import React, { Component, ScrollView, View, Text, WebView, Image, TouchableHighlight } from 'react-native';
 import { Button, Card, Divider, COLOR, TYPO, Icon  } from 'react-native-material-design';
-import AppStore from '../stores/AppStore';
+import AppStore from '../../stores/AppStore';
 
 
-export default class Avatars extends Component {
-
-  static contextTypes = {
-      navigator: PropTypes.object.isRequired
-  };
+export default class OrderDetails extends Component {
 
     render() {
       const theme = AppStore.getState().theme;
-      const { navigator } = this.context;
-
 
         return (
+
           <ScrollView>
               <View>
               <Card>
@@ -25,14 +20,14 @@ export default class Avatars extends Component {
                     </Card.Body>
                     <Divider />
                     <View style={{flexDirection: 'row'}}><Text style={{flexDirection:'column', flex:0.5}}>Logistics Fee</Text>
-                    <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right'}}>- $22.99</Text>
+                      <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right'}}>- $22.99</Text>
                     </View>
                     <View style={{flexDirection: 'row'}}><Text style={{flexDirection:'column', flex:0.5}}>Taxes</Text>
-                    <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right'}}>- $12.23</Text>
+                      <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right'}}>- $12.23</Text>
                     </View>
                     <Divider />
                     <View style={{flexDirection: 'row'}}><Text style={{flexDirection:'column', flex:0.5, fontWeight: '500'}}>Total</Text>
-                    <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right', fontWeight: '500'}}>$864.78</Text>
+                      <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right', fontWeight: '500'}}>$864.78</Text>
                     </View>
                     <Card.Actions position="right">
                     <Button value="VIEW INVOICE DETAILS" primary={theme}/>
@@ -40,25 +35,17 @@ export default class Avatars extends Component {
               </Card>
               <Card>
                     <Card.Media
-                          image={<Image source={require('./../img/welcome.png')}/>}
-                          height= {200}
+                          image={<Image source={require('./../../img/welcome.png')}/>}
                           overlay>
                           <Text style={[TYPO.paperSubhead, COLOR.paperGrey50]}>Deliver to ZipCar at Dock 3, Steveston Harbour</Text>
                     </Card.Media>
                     <Card.Actions position="right">
                     <View style ={{paddingTop: 10, paddingLeft: 5}}>
                     </View>
-                    <Button value="GET MAP DIRECTIONS" primary={theme}  />
+                    <Button value="GET MAP DIRECTIONS" primary={theme} />
                     </Card.Actions>
               </Card>
-              <View style={{flexDirection: 'row'}}>
-                <View style={{flexDirection: 'column', flex: 0.5}}>
-                  <Button onPress={()=> {navigator.back()}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} raised={true}/>
-                </View>
-                <View style={{flexDirection: 'column', flex: 0.5}}>
-                  <Button value="ACCEPT" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}}  raised={true}/>
-                </View>
-              </View>
+
            </View>
            </ScrollView>
         );

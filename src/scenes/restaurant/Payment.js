@@ -1,6 +1,6 @@
 import React, { Component, View, Image, Text, TouchableHighlight } from 'react-native';
 import { Subheader, Divider, CheckboxGroup, Card, Icon, Button } from 'react-native-material-design';
-import AppStore from '../stores/AppStore';
+import AppStore from '../../stores/AppStore';
 
 export default class Route extends Component {
 

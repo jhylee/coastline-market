@@ -1,8 +1,8 @@
 import React, { Component, ScrollView, PropTypes, View, Text, Image, IntentAndroid } from 'react-native';
 import { Card, Button, COLOR, TYPO } from 'react-native-material-design';
-import AppStore from '../stores/AppStore';
+import AppStore from '../../stores/AppStore';
 
-export default class Welcome extends Component {
+export default class FisherOrders extends Component {
    static contextTypes = {
       navigator: PropTypes.object.isRequired
    };
@@ -38,8 +38,7 @@ export default class Welcome extends Component {
                   function dateToString(date) {
                      var string = date.toString().split(" ");
                      string = string[0] + " " + string[1] + " " + string[2] + ", " + string[4];
-
-                     return string;
+                     return string.substr(0,17);
                   }
 
                   // TODO date format

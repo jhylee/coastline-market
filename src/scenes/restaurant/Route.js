@@ -1,6 +1,6 @@
 import React, { Component, View, Image, Text } from 'react-native';
 import { Subheader, Divider, CheckboxGroup, Card, Icon, Button } from 'react-native-material-design';
-import AppStore from '../stores/AppStore';
+import AppStore from '../../stores/AppStore';
 
 export default class Route extends Component {
 
@@ -23,7 +23,7 @@ export default class Route extends Component {
             />
             <Card>
                 <Card.Media
-                  image={<Image source={require('./../img/welcome.png')}/>}
+                  image={<Image source={require('./../../img/welcome.png')}/>}
                   height= {120}
                   overlay>
                 </Card.Media>

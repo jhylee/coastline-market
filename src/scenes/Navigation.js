@@ -43,23 +43,17 @@ export default class Navigation extends Component {
                     items={[{
                         icon: 'local-offer',
                         value: 'Available Orders',
-                        active: !route || route === 'welcome',
+                        active: !route || route === 'fisherorders',
                         label: '12',
-                        onPress: () => this.changeScene('welcome'),
-                        onLongPress: () => this.changeScene('welcome')
+                        onPress: () => this.changeScene('fisherorders'),
+                        onLongPress: () => this.changeScene('fisherorders')
                     }, {
                         icon: 'assignment-turned-in',
                         value: 'Reserved Orders',
                         active: route === 'buttons',
                         label: '8',
-                        onPress: () => this.changeScene('buttons'),
-                        onLongPress: () => this.changeScene('buttons')
-                    }, {
-                      icon: 'settings',
-                      value: 'Settings',
-                      active: route === 'list',
-                      onPress: () => this.changeScene('avatars'),
-                      onLongPress: () => this.changeScene('avatars')
+                        onPress: () => this.changeScene('reservedorders'),
+                        onLongPress: () => this.changeScene('reservedorders')
                     }, {
                       icon: 'palette',
                       value: 'Application Theme',
@@ -81,7 +75,7 @@ export default class Navigation extends Component {
                     },
                     {
                       icon: 'history',
-                      value: 'Order',
+                      value: 'Order History',
                       active: route === 'orderhistory',
                       onPress: () => this.changeScene('orderhistory'),
                       onLongPress: () => this.changeScene('orderhistory')
@@ -91,6 +85,17 @@ export default class Navigation extends Component {
                       active: route === 'payment',
                       onPress: () => this.changeScene('payment'),
                       onLongPress: () => this.changeScene('payment')
+                    }
+                  ]}
+                />
+                <Drawer.Section
+                    title="Logistics Section"
+                    items={[{
+                        icon: 'airport-shuttle',
+                        value: 'Pick Ups',
+                        active: route === 'logistics',
+                        onPress: () => this.changeScene('logistics'),
+                        onLongPress: () => this.changeScene('logistics')
                     }
                   ]}
                 />

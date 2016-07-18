@@ -1,5 +1,5 @@
 export default {
-    // Fishery Pages
+
     login: {
       initialRoute: true,
       title: 'Login',
@@ -8,75 +8,44 @@ export default {
       children: {
           welcome: {
               title: 'Coastline Market',
-              component: require('./scenes/Welcome').default,
+              component: require('./scenes/fisher/FisherOrders').default,
               children: {
                   example: {
                        title: 'Order Details', // optional
-                      component: require('./scenes/NestedExample').default
+                      component: require('./scenes/fisher/ProductDetail').default
                   }
               }
           }
       }
     },
 
-    welcome: {
+    // Fishery Pages
+    fisherorders: {
       title: 'Coastline Market',
-      component: require('./scenes/Welcome').default,
+      component: require('./scenes/fisher/FisherOrders').default,
       children: {
-          example: {
+          productdetail: {
                title: 'Order Details', // optional
-              component: require('./scenes/NestedExample').default
+              component: require('./scenes/fisher/ProductDetail').default
           }
       }
     },
 
-
-    avatars: {
+    settings: {
         title: 'Settings',
-        component: require('./scenes/Avatars').default
+        component: require('./scenes/fisher/Settings').default
     },
 
-    buttons: {
+    reservedorders: {
         title: 'Reserved Orders',
-        component: require('./scenes/Buttons').default,
+        component: require('./scenes/fisher/ReservedOrders').default,
 
         children: {
-            example: {
+            orderdetails: {
                  title: 'My Order', // optional
-                component: require('./scenes/RadioButtons').default
+                component: require('./scenes/fisher/OrderDetails').default
             }
         }
-    },
-
-    checkboxes: {
-        title: 'Checkboxes',
-        component: require('./scenes/Checkboxes').default
-    },
-
-    dividers: {
-        title: 'Dividers',
-        component: require('./scenes/Dividers').default
-    },
-
-    list: {
-
-        title: 'List',
-        component: require('./scenes/List').default
-    },
-
-    'icon-toggles': {
-        title: 'Icon Toggles',
-        component: require('./scenes/IconToggles').default
-    },
-
-    'radio-buttons': {
-        title: 'Radio Buttons',
-        component: require('./scenes/RadioButtons').default
-    },
-
-    subheaders: {
-        title: 'Subheaders',
-        component: require('./scenes/Subheaders').default
     },
 
     themes: {
@@ -84,42 +53,57 @@ export default {
         component: require('./scenes/Themes').default
     },
 
+
+    // Restaurant Pages
+
     orderhistory: {
       title: 'Order history',
-      component: require('./scenes/OrderHistory').default
+      component: require('./scenes/restaurant/OrderHistory').default
     },
 
     payment: {
       title: 'Payment',
-      component: require('./scenes/Payment').default
+      component: require('./scenes/restaurant/Payment').default
     },
 
-    // Restaurant Pages
     restaurants: {
       title: 'Restaurant Order',
-      component: require('./scenes/AvailableOrders').default,
+      component: require('./scenes/restaurant/AvailableOrders').default,
 
       children: {
           product: {
               title: 'Product Details',
-              component: require('./scenes/ProductDetail').default,
+              component: require('./scenes/restaurant/ProductDetail').default,
               children: {
                 cart: {
                     title: 'Your Cart',
-                    component: require('./scenes/Cart').default,
+                    component: require('./scenes/restaurant/Cart').default,
 
                     children: {
                       route: {
                         title: 'Order #XAGAEWR',
-                        component: require('./scenes/Route').default,
+                        component: require('./scenes/restaurant/Route').default,
                       }
                     }
                 }
               }
-
           }
       }
 
+    },
+
+    // Logistics Pages
+    logistics: {
+      title: 'Pickup Schedule',
+      component: require('./scenes/logistics/PickUpSchedule').default,
+      children: {
+        details: {
+          title: 'Pickup Details',
+          component: require('./scenes/logistics/PickUpDetails').default,
+        }
+      }
+
     }
+
 
 }

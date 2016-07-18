@@ -33,9 +33,12 @@ export default class Login extends Component {
 	               name="email"
 	               style={styles.textInput}
 								 keyboardType="email-address"
-	               placeholder={'Username (Email)'} />
-							</View>
-							<View style={styles.row}>
+	               placeholder={'Your Email'} />
+								 <TextInput
+	 	               name="email"
+	 	               style={styles.textInput}
+	 								 keyboardType="numeric"
+	 	               placeholder={'Your Phone Number'} />
 							<TextInput
 								 name="password"
 								 style={styles.textInput}

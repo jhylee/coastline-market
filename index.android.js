@@ -3,7 +3,7 @@ import React, { AppRegistry, Component, Navigator, DrawerLayoutAndroid, ScrollVi
 import Navigate from './src/utils/Navigate';
 import { Toolbar } from './src/components';
 import Navigation from './src/scenes/Navigation';
-import Welcome from './src/scenes/Welcome';
+import Welcome from './src/scenes/fisher/FisherOrders';
 
 class Application extends Component {
 
