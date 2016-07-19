@@ -1,4 +1,4 @@
-import React, { Component, ScrollView, PropTypes, View, Text, Image, IntentAndroid } from 'react-native';
+import React, { Component, ScrollView, PropTypes, View, Text, Image, IntentAndroid, TextInput } from 'react-native';
 import { Card, Button, COLOR, TYPO } from 'react-native-material-design';
 import AppStore from '../../stores/AppStore';
 import Coastline from '../../coastline';
@@ -10,15 +10,17 @@ export default class FisherOrders extends Component {
 
    constructor(props) {
       super(props);
-      Coastline.fisher.subscribe(this);
+      Coastline.fisher.available.subscribe(this);
+
+      this.state.filter = "";
    }
 
    componentDidMount() {
-      Coastline.fisher.subscribe(this);
+      Coastline.fisher.available.subscribe(this);
    }
 
    componentWillUnmount() {
-      Coastline.fisher.unsubscribe(this);
+      Coastline.fisher.available.unsubscribe(this);
    }
 
    render() {
@@ -27,6 +29,14 @@ export default class FisherOrders extends Component {
 
       return (
          <ScrollView>
+            <TextInput
+               style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+               onChangeText={(text) => {
+                  this.state.filter = text;
+                  this.setState(this.state);
+               }}
+               value={this.state.filter} />
+
             <View style={{paddingTop: 10}}></View>
                <View style={{flexDirection: 'row'}}>
                <View style={{flexDirection: 'column', flex: 0.5}}>
@@ -44,7 +54,7 @@ export default class FisherOrders extends Component {
                      return s[0] + " " + s[1] + " " + s[2] + ", " + s[4];
                   }
 
-                  return self.state.available.map(function(member) {
+                  return Coastline.fisher.available.get(self, self.state.filter || "").map(function(member) {
                      return (
                         <Card>
                            <Card.Body>
