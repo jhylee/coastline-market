@@ -1,11 +1,25 @@
 import React, { Component, ScrollView, PropTypes, View, Text, Image, IntentAndroid } from 'react-native';
 import { Card, Button, COLOR, TYPO } from 'react-native-material-design';
 import AppStore from '../../stores/AppStore';
+import Coastline from '../../coastline';
 
 export default class FisherOrders extends Component {
    static contextTypes = {
       navigator: PropTypes.object.isRequired
    };
+
+   constructor(props) {
+      super(props);
+      Coastline.fisher.subscribe(this);
+   }
+
+   componentDidMount() {
+      Coastline.fisher.subscribe(this);
+   }
+
+   componentWillUnmount() {
+      Coastline.fisher.unsubscribe(this);
+   }
 
    render() {
       const { navigator } = this.context;
@@ -24,25 +38,13 @@ export default class FisherOrders extends Component {
             </View>
 
             {
-               function() {
-                  var sample_data = [
-                     {
-                        name: "Pacific Cod",
-                        weight: 150,
-                        units: "lbs",
-                        date: new Date(),
-                        zone: "Steveston Harbour",
-                     },
-                  ];
-
+               function(self) {
                   function dateToString(date) {
-                     var string = date.toString().split(" ");
-                     string = string[0] + " " + string[1] + " " + string[2] + ", " + string[4];
-                     return string.substr(0,17);
+                     var s = date.toString().split(" ");
+                     return s[0] + " " + s[1] + " " + s[2] + ", " + s[4];
                   }
 
-                  // TODO date format
-                  return sample_data.map(function(member) {
+                  return self.state.available.map(function(member) {
                      return (
                         <Card>
                            <Card.Body>
@@ -61,7 +63,7 @@ export default class FisherOrders extends Component {
                         </Card>
                      );
                   });
-               }()
+               }(this)
             }
          </ScrollView>
       );
