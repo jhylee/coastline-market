@@ -54,7 +54,7 @@ export default class ReservedOrders extends Component {
                      return (
                         <View>
                            <Divider/>
-                           <TouchableHighlight style={styles.column}  underlayColor="#ECEFF1" onPress={()=> {navigator.forward()}}>
+                           <TouchableHighlight style={styles.column}  underlayColor="#ECEFF1" onPress={()=>{navigator.forward('productdetail', undefined, {product: member})}}>
                               <View style={styles.row}>
                                  <Text style={{textAlign: 'left', flex: 0.6, fontSize:18, fontWeight: '500'}}>
                                     {member.name + ", " + member.weight + member.units}
