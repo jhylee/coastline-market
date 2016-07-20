@@ -1,6 +1,11 @@
 var local = {
    fisher: {
       available: new Channel("available"),
+      reserved: new Channel("reserved"),
+   },
+   dateToString: function(date) {
+      var s = date.toString().split(" ");
+      return s[0] + " " + s[1] + " " + s[2] + ", " + s[4];
    },
 };
 
@@ -11,12 +16,12 @@ function Channel(title) {
 
    this.title = title;
    this.data = [];
-   this.subscribers = [];
+   this.subscriptions = [];
 
-   function getSubscriber(context) {
+   function getSubscription(context) {
       var result;
 
-      global.subscribers.map(function(item) {
+      global.subscriptions.map(function(item) {
          if (item.context == context)
             result = item;
       });
@@ -25,38 +30,56 @@ function Channel(title) {
    }
 
    this.subscribe = function(context) {
-      var subscriber = getSubscriber(context);
+      var subscription = getSubscription(context);
 
-      if (!subscriber) {
-         global.subscribers.push(new Subscriber(context, this));
+      if (!subscription) {
+         global.subscriptions.push(new Subscription(context, this));
       }
 
       return context;
    };
    this.unsubscribe = function(context) {
-      var subscriber = getSubscriber(context);
+      var subscription = getSubscription(context);
 
-      if (subscriber) {
-         global.subscribers.splice(global.subscribers.indexOf(subscriber), 1);
+      if (subscription) {
+         global.subscriptions.splice(global.subscriptions.indexOf(subscription), 1);
       }
 
       return context;
    };
    this.get = function(context, filter) {
-      var subscriber = getSubscriber(context);
+      var subscription = getSubscription(context);
 
-      if (subscriber) {
-         subscriber.state[global.title].splice(0, subscriber.state[global.title].length);
+      if (subscription) {
+         subscription.state[global.title].splice(0, subscription.state[global.title].length);
          filter = filter.toLowerCase();
 
+         function testFilter(string, filter) {
+            for (var i = 0; i < string.length; ++i) {
+               var match = true;
+
+               for (var j = 0; j < filter.length; ++j) {
+                  if (i + j >= string.length || string[i + j] != filter[j]) {
+                     match = false;
+                     break;
+                  }
+               }
+
+               if (match) return true;
+            }
+
+            return false;
+         }
+
          global.data.map(function(item) {
-            if (item.name.toLowerCase().includes(filter) ||
-                item.zone.toLowerCase().includes(filter))
-                
-               subscriber.state[global.title].push(item);
+            if (testFilter(item.name.toLowerCase(), filter) ||
+                testFilter(item.zone.toLowerCase(), filter)) {
+
+               subscription.state[global.title].push(item);
+            }
          });
 
-         return subscriber.state[global.title];
+         return subscription.state[global.title];
       }
       else {
          return false;
@@ -64,11 +87,11 @@ function Channel(title) {
    };
    this.push = function(item) {
       global.data.unshift(item);
-      global.subscribers.map(setState);
+      global.subscriptions.map(setState);
    };
 }
 
-function Subscriber(context, channel) {
+function Subscription(context, channel) {
    this.context = context;
    this.channel = channel;
    this.context.state = this.context.state || {};
@@ -78,21 +101,38 @@ function Subscriber(context, channel) {
    this.state = this.context.state;
 }
 
-function setState(subscriber) {
-   subscriber.context.setState(subscriber.context.state);
+function setState(subscription) {
+   subscription.context.setState(subscription.context.state);
 }
 
-var dummyData = setInterval(function() {
+for (var i = 0; i < 10; ++i) {
    var name = ""
-   "abcdefghijklmnopqrstuvwxyz123".split("").map(function(char) {
+   "AZAZAZAZAZAZAZAZAZAZAZAZAZAZAZ".split("").map(function(char) {
       if (Math.random() > 0.9)
          name += char;
    });
    local.fisher.available.push({
+      // fisher orders
       name: name,
-      weight: 100,
+      weight: Math.round(Math.random()*1000),
       units: "lbs",
       date: new Date(),
       zone: "Test Area",
+
+      // product details
+      priceMarket: 999.99,
+      priceCoastline: Math.round(Math.random()*1000)/100,
+      feeLogistics: Math.round(Math.random()*5*200)/100,
+      taxRate: 0.13,
+
+      // reserved details
+      reserved: undefined,
    });
-}, 2000);
+}
+
+local.fisher.available.data.map(function(product) {
+   if (Math.random() > 0.5) {
+      product.reserved = new Date();
+      local.fisher.reserved.push(product);
+   }
+});

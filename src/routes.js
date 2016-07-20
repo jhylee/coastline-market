@@ -1,23 +1,20 @@
 export default {
-
     login: {
       initialRoute: true,
       title: 'Login',
       component:require('./scenes/Login').default,
-
-      children: {
-          welcome: {
-              title: 'Coastline Market',
-              component: require('./scenes/fisher/FisherOrders').default,
-              children: {
-                  example: {
-                       title: 'Order Details', // optional
-                      component: require('./scenes/fisher/ProductDetail').default
-                  }
-              }
-          }
-      }
     },
+
+    /*welcome: {
+        title: 'Coastline Market',
+        component: require('./scenes/fisher/FisherOrders').default,
+        children: {
+            example: {
+                 title: 'Order Details', // optional
+                component: require('./scenes/fisher/ProductDetail').default
+            }
+        }
+    },*/
 
     // Fishery Pages
     fisherorders: {
@@ -25,15 +22,10 @@ export default {
       component: require('./scenes/fisher/FisherOrders').default,
       children: {
           productdetail: {
-               title: 'Order Details', // optional
+               title: 'Product Details', // optional
               component: require('./scenes/fisher/ProductDetail').default
           }
       }
-    },
-
-    settings: {
-        title: 'Settings',
-        component: require('./scenes/fisher/Settings').default
     },
 
     reservedorders: {
@@ -51,6 +43,11 @@ export default {
     themes: {
         title: 'Change Theme',
         component: require('./scenes/Themes').default
+    },
+
+    settings: {
+        title: 'Settings',
+        component: require('./scenes/fisher/Settings').default
     },
 
 

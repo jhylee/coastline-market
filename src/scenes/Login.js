@@ -53,7 +53,7 @@ export default class Login extends Component {
 						</Card.Actions>
 			</Card>
 					<View style={{flexDirection: 'column', flex: 1}}>
-						<Button value="SIGN UP/LOG IN" onPress={() => { navigator.forward() }} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
+						<Button value="SIGN UP/LOG IN" onPress={() => { navigator.to('fisherorders') }} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
 					</View>
 			</View>
 		);

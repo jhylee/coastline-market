@@ -1,6 +1,6 @@
 import React, { Component, PropTypes, View, Text, Image } from 'react-native';
-
 import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-design';
+import Coastline from '../coastline';
 
 export default class Navigation extends Component {
 
@@ -11,8 +11,11 @@ export default class Navigation extends Component {
 
     constructor(props) {
         super(props);
+        Coastline.fisher.available.subscribe(this);
+        Coastline.fisher.reserved.subscribe(this);
+
         this.state = {
-            route: null
+            route: null,
         }
     }
 
@@ -44,14 +47,14 @@ export default class Navigation extends Component {
                         icon: 'local-offer',
                         value: 'Available Orders',
                         active: !route || route === 'fisherorders',
-                        label: '12',
+                        label: ''+ Coastline.fisher.available.get(this, "").length,
                         onPress: () => this.changeScene('fisherorders'),
                         onLongPress: () => this.changeScene('fisherorders')
                     }, {
                         icon: 'assignment-turned-in',
                         value: 'Reserved Orders',
                         active: route === 'buttons',
-                        label: '8',
+                        label: ''+ Coastline.fisher.reserved.get(this, "").length,
                         onPress: () => this.changeScene('reservedorders'),
                         onLongPress: () => this.changeScene('reservedorders')
                     }, {

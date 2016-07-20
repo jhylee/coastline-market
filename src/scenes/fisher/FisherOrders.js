@@ -24,8 +24,8 @@ export default class FisherOrders extends Component {
    }
 
    render() {
-      const { navigator } = this.context;
       const theme = AppStore.getState().theme;
+      const { navigator } = this.context;
 
       return (
          <ScrollView>
@@ -37,23 +37,19 @@ export default class FisherOrders extends Component {
                }}
                value={this.state.filter} />
 
-            <View style={{paddingTop: 10}}></View>
+            <View style={styles.tabSwitchContainer}>
                <View style={{flexDirection: 'row'}}>
-               <View style={{flexDirection: 'column', flex: 0.5}}>
-                  <Button text="AVAILABLE" primary={theme} theme="dark" raised/>
-               </View>
-               <View style={{flexDirection: 'column', flex: 0.5}}>
-                  <Button text="RESERVED" primary={theme} raised onPress={()=> {navigator.forward()}}/>
+                  <View style={{flexDirection: 'column', flex: 0.5}}>
+                     <Button text="AVAILABLE" primary={theme} theme="dark" raised/>
+                  </View>
+                  <View style={{flexDirection: 'column', flex: 0.5}}>
+                     <Button text="RESERVED" primary={theme} raised onPress={()=> { navigator.to('reservedorders') }}/>
+                  </View>
                </View>
             </View>
 
             {
                function(self) {
-                  function dateToString(date) {
-                     var s = date.toString().split(" ");
-                     return s[0] + " " + s[1] + " " + s[2] + ", " + s[4];
-                  }
-
                   return Coastline.fisher.available.get(self, self.state.filter || "").map(function(member) {
                      return (
                         <Card>
@@ -61,14 +57,14 @@ export default class FisherOrders extends Component {
                               <View style={styles.column}>
                                  <View style={styles.row}>
                                     <Text style={{fontSize:20, flex:0.7}}> {member.name + ", " + member.weight + member.units} </Text>
-                                    <Text style={{fontSize:12, flex:0.3, textAlign: 'right'}}> {dateToString(member.date)} </Text>
+                                    <Text style={{fontSize:12, flex:0.3, textAlign: 'right'}}> {Coastline.dateToString(member.date)} </Text>
                                  </View>
                               </View>
                               <Text> Delivery Zone: {member.zone} </Text>
                               <Text> Order Requested for {member.weight + member.units} of {member.name}. </Text>
                            </Card.Body>
                            <Card.Actions position="right">
-                              <Button value="VIEW DETAILS" primary={theme}  onPress={() => { navigator.forward() }}/>
+                              <Button value="VIEW DETAILS" primary={theme}  onPress={() => { navigator.forward('productdetail', undefined, {product: member}) }}/>
                            </Card.Actions>
                         </Card>
                      );

@@ -4,6 +4,10 @@ import AppStore from '../../stores/AppStore';
 
 
 export default class OrderDetails extends Component {
+   constructor() {
+      super(props);
+      console.log(props);
+   }
 
     render() {
       const theme = AppStore.getState().theme;
