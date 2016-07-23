@@ -1,3 +1,13 @@
+if (!window.location) {
+   window.navigator.userAgent = 'ReactNative';
+}
+
+var io = require('socket.io-client/socket.io');
+var socket = io('10.16.20.126:8999', {transports: ['websocket'], jsonp: false});
+socket.on("token", function() {
+   socket.emit("token", {token: 123123});
+});
+
 var local = {
    itemTotals: function(item) {
       var grand = 0, total = 0, tax = 0;
@@ -12,7 +22,7 @@ var local = {
       return {
          total,
          tax,
-         grand
+         grand,
       };
    },
    fisher: {
