@@ -1,6 +1,7 @@
 import React, { Component, ScrollView, View, Text, WebView, Image, TouchableHighlight, PropTypes, MapView } from 'react-native';
 import { Button, Card, Divider, COLOR, TYPO, Icon  } from 'react-native-material-design';
 import AppStore from '../../stores/AppStore';
+import Coastline from '../../coastline';
 
 export default class ProductDetail extends Component {
    static contextTypes = {
@@ -12,17 +13,6 @@ export default class ProductDetail extends Component {
 
       this.state = {};
       this.state.product = props.product;
-      this.state.product.total =
-         this.state.product.weight *
-         this.state.product.priceCoastline +
-         this.state.product.feeLogistics;
-
-      this.state.product.taxTotal = (this.state.product.total - this.state.product.feeLogistics) * this.state.product.taxRate;
-      this.state.product.grandTotal = this.state.product.taxTotal + this.state.product.total;
-
-      this.state.product.total = Math.round(this.state.product.total*100)/100;
-      this.state.product.taxTotal = Math.round(this.state.product.taxTotal*100)/100;
-      this.state.product.grandTotal = Math.round(this.state.product.grandTotal*100)/100;
    }
 
    render() {
@@ -47,12 +37,12 @@ export default class ProductDetail extends Component {
                   </View>
                   <View style={{flexDirection: 'row'}}>
                      <Text style={{flexDirection:'column', flex:0.5}}>Taxes</Text>
-                     <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right'}}>- ${this.state.product.taxTotal}</Text>
+                     <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right'}}>- ${Coastline.itemTotals(this.state.product).tax}</Text>
                   </View>
                   <Divider />
                   <View style={{flexDirection: 'row'}}>
                      <Text style={{flexDirection:'column', flex:0.5, fontWeight: '500'}}>Total</Text>
-                     <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right', fontWeight: '500'}}>${this.state.product.grandTotal}</Text>
+                     <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right', fontWeight: '500'}}>${Coastline.itemTotals(this.state.product).grand}</Text>
                   </View>
                   <Card.Actions position="right">
                      <Button value="VIEW INVOICE DETAILS" primary={theme}/>
@@ -85,7 +75,17 @@ export default class ProductDetail extends Component {
                      <Button onPress={()=> {navigator.back()}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} raised={true}/>
                   </View>
                   <View style={{flexDirection: 'column', flex: 0.5}}>
-                     <Button value="ACCEPT" overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}}  raised={true}/>
+                     <Button value={Coastline.fisher.reserved.contains(this.state.product) ? "REMOVE" : "ACCEPT"} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}
+                        onPress={() => {
+                           if (this.state.product.reserved) {
+                              Coastline.fisher.removeReserved(this.state.product);
+                           }
+                           else {
+                              Coastline.fisher.addReserved(this.state.product);
+                           }
+                           navigator.back();
+                        }}
+                     />
                   </View>
                </View>
             </View>

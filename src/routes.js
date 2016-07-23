@@ -53,7 +53,7 @@ export default {
       title: 'Restaurant Order',
       component: require('./scenes/restaurant/AvailableOrders').default,
       children: {
-         product: {
+         productdetail: {
             title: 'Product Details',
             component: require('./scenes/restaurant/ProductDetail').default,
             children: {

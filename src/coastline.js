@@ -1,7 +1,37 @@
 var local = {
+   itemTotals: function(item) {
+      var grand = 0, total = 0, tax = 0;
+      total = item.weight*item.priceCoastline + item.feeLogistics;
+      tax = item.weight*item.priceCoastline*item.taxRate;
+      grand = total + tax;
+
+      total = Math.round(total*100)/100;
+      tax = Math.round(tax*100)/100;
+      grand = Math.round(grand*100)/100;
+
+      return {
+         total,
+         tax,
+         grand
+      };
+   },
    fisher: {
       available: new Channel("available"),
       reserved: new Channel("reserved"),
+      addReserved: function(item) {
+         item.reserved = new Date();
+         local.fisher.available.remove(item);
+         local.fisher.reserved.push(item);
+      },
+      removeReserved: function(item) {
+         item.reserved = undefined;
+         local.fisher.reserved.remove(item);
+         local.fisher.available.push(item);
+      },
+   },
+   restaurant: {
+      available: new Channel("orders"),
+      history: new Channel("history"),
    },
    dateToString: function(date) {
       var s = date.toString().split(" ");
@@ -89,6 +119,14 @@ function Channel(title) {
       global.data.unshift(item);
       global.subscriptions.map(setState);
    };
+   this.remove = function(item) {
+      if (global.data.indexOf(item) != -1) {
+         global.data.splice(global.data.indexOf(item), 1);
+      }
+   };
+   this.contains = function(item) {
+      return global.data.indexOf(item) != -1;
+   };
 }
 
 function Subscription(context, channel) {
@@ -130,9 +168,30 @@ for (var i = 0; i < 10; ++i) {
    });
 }
 
-local.fisher.available.data.map(function(product) {
-   if (Math.random() > 0.5) {
-      product.reserved = new Date();
-      local.fisher.reserved.push(product);
-   }
-});
+for (var i = 0; i < 10; ++i) {
+   var name = ""
+   "oFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoF".split("").map(function(char) {
+      if (Math.random() > 0.9)
+         name += char;
+   });
+   local.restaurant.available.push({
+      // fisher orders
+      name: name,
+      weight: Math.round(Math.random()*1000),
+      units: "lb",
+      date: new Date(),
+      zone: "Test Area",
+
+      // product details
+      priceMarket: 999.99,
+      priceCoastline: Math.round(Math.random()*1000)/100,
+      feeLogistics: Math.round(Math.random()*5*200)/100,
+      taxRate: 0.13,
+      deliveryTime: new Date(),
+      deliveryTimeMin: -4*1000*60*60,
+      deliveryTimeMax: 4*1000*60*60,
+
+      // reserved details
+      reserved: undefined,
+   });
+}

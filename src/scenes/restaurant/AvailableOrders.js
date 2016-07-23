@@ -1,8 +1,12 @@
 import React, { Component, View, ScrollView, PropTypes, Image, Text, TextInput } from 'react-native';
 import { Avatar, Subheader, COLOR, IconToggle, Icon, Button, Card } from 'react-native-material-design';
 import AppStore from '../../stores/AppStore';
+import Coastline from '../../coastline';
 
 export default class AvailableOrders extends Component {
+   static contextTypes = {
+		navigator: PropTypes.object.isRequired
+	};
 
 	constructor(props) {
 		super(props);
@@ -11,10 +15,19 @@ export default class AvailableOrders extends Component {
 			badgeTwo: 6,
 			badgeThree: 9
 		};
-	}
-	static contextTypes = {
-			navigator: PropTypes.object.isRequired
-	};
+
+      Coastline.restaurant.available.subscribe(this);
+
+      this.state.filter = "";
+   }
+
+   componentDidMount() {
+      Coastline.restaurant.available.subscribe(this);
+   }
+
+   componentWillUnmount() {
+      Coastline.restaurant.available.unsubscribe(this);
+   }
 
 	incrementBadge = (badge) => {
 		this.setState({[badge]: this.state[badge] + 1});
@@ -26,69 +39,46 @@ export default class AvailableOrders extends Component {
 
 		return (
 			<ScrollView>
-			<View style={{backgroundColor:'#FFF', margin: 5, borderRadius: 2, elevation: 1, paddingHorizontal: 20}}>
-			<TextInput
-				 name="email"
-				 style={styles.textInput}
-				 placeholder={'Search for a product or fish type'} />
-			</View>
-			<Card>
-						<Card.Media
-									image={<Image source={require('./../../img/salmon.jpg')}/>}
-									overlay>
-						</Card.Media>
-						<Card.Body>
-						<View style={styles.column}>
-							<View style={styles.row}>
-								<Text style={{fontSize:20, flex:0.7, fontWeight: '500'}}>Pacific Salmon</Text>
-								<Text style={{fontSize:16, flex:0.3, textAlign: 'right', fontWeight: '500'}}>$3.99/lb</Text>
-							</View>
-						</View>
-							 <Text>Caught June 15, 2016</Text>
-							 <Text>Delivered from Steveston Fish Wharf</Text>
-						</Card.Body>
-						<Card.Actions position="right">
-						<Button value="ADD TO CART" primary={theme}  onPress={() => { navigator.forward() }}/>
-						</Card.Actions>
-			</Card>
-			<Card>
-						<Card.Media
-									image={<Image source={require('./../../img/salmon.jpg')}/>}
-									overlay>
-						</Card.Media>
-						<Card.Body>
-						<View style={styles.column}>
-							<View style={styles.row}>
-								<Text style={{fontSize:20, flex:0.7, fontWeight: '500'}}>Pacific Salmon</Text>
-								<Text style={{fontSize:16, flex:0.3, textAlign: 'right', fontWeight: '500'}}>$3.99/lb</Text>
-							</View>
-						</View>
-							 <Text>Caught June 15, 2016</Text>
-							 <Text>Delivered from Steveston Fish Wharf</Text>
-						</Card.Body>
-						<Card.Actions position="right">
-						<Button value="ADD TO CART" primary={theme}  onPress={() => { navigator.forward() }}/>
-						</Card.Actions>
-			</Card>
-			<Card>
-						<Card.Media
-									image={<Image source={require('./../../img/salmon.jpg')}/>}
-									overlay>
-						</Card.Media>
-						<Card.Body>
-						<View style={styles.column}>
-							<View style={styles.row}>
-								<Text style={{fontSize:20, flex:0.7, fontWeight: '500'}}>Pacific Salmon</Text>
-								<Text style={{fontSize:16, flex:0.3, textAlign: 'right', fontWeight: '500'}}>$3.99/lb</Text>
-							</View>
-						</View>
-							 <Text>Caught June 15, 2016</Text>
-							 <Text>Delivered from Steveston Fish Wharf</Text>
-						</Card.Body>
-						<Card.Actions position="right">
-						<Button value="ADD TO CART" primary={theme}  onPress={() => { navigator.forward() }}/>
-						</Card.Actions>
-			</Card>
+   			<View style={{backgroundColor:'#FFF', margin: 5, borderRadius: 2, elevation: 1, paddingHorizontal: 20}}>
+               <TextInput
+                  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                  onChangeText={(text) => {
+                     this.state.filter = text;
+                     this.setState(this.state);
+                  }}
+                  value={this.state.filter} />
+   			</View>
+
+            {
+               function(self) {
+                  return Coastline.restaurant.available.get(self, self.state.filter || "").map(function(member) {
+                     return (
+                        <Card>
+         						<Card.Media
+   									image={<Image source={require('./../../img/salmon.jpg')}/>}
+   									overlay />
+         						<Card.Body>
+            						<View style={styles.column}>
+            							<View style={styles.row}>
+            								<Text style={{fontSize:20, flex:0.7, fontWeight: '500'}}>
+                                       {member.name}
+                                    </Text>
+            								<Text style={{fontSize:16, flex:0.3, textAlign: 'right', fontWeight: '500'}}>
+                                       ${member.priceCoastline}/{member.units}
+                                    </Text>
+            							</View>
+            						</View>
+         							<Text>Caught {Coastline.dateToString(member.date)}</Text>
+         							<Text>Delivered from {member.zone}</Text>
+         						</Card.Body>
+         						<Card.Actions position="right">
+         						   <Button value="ADD TO CART" primary={theme}  onPress={() => { navigator.forward('productdetail', undefined, {product: member}) }}/>
+         						</Card.Actions>
+               			</Card>
+                     );
+                  });
+               }(this)
+            }
 			</ScrollView>
 		);
 	}
