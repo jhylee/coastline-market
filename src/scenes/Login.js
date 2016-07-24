@@ -1,6 +1,7 @@
 import React, { Component, View, PropTypes, Image, Text, TextInput } from 'react-native';
 import { Avatar, Subheader, COLOR, IconToggle, Icon, Button, Card } from 'react-native-material-design';
 import AppStore from '../stores/AppStore';
+import AuthActions from '../actions/AuthActions';
 
 export default class Login extends Component {
 
@@ -19,6 +20,17 @@ export default class Login extends Component {
 	incrementBadge = (badge) => {
 		this.setState({[badge]: this.state[badge] + 1});
 	};
+
+	login = () => {
+		const { navigator } = this.context;
+		console.log('login');
+		AuthActions.login().then((res) => {
+			if (res.accountClass == "userSupplier") {
+
+			}
+		});
+		navigator.to('fisherorders');
+	}
 
 	render() {
 		const { navigator } = this.context;
@@ -53,7 +65,7 @@ export default class Login extends Component {
 						</Card.Actions>
 			</Card>
 					<View style={{flexDirection: 'column', flex: 1}}>
-						<Button value="SIGN UP/LOG IN" onPress={() => { navigator.to('fisherorders') }} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
+						<Button value="SIGN UP/LOG IN" onPress={this.login} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
 					</View>
 			</View>
 		);

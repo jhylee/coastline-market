@@ -2,6 +2,7 @@ import React, { Component, ScrollView, PropTypes, View, Text, Image, IntentAndro
 import { Card, Button, COLOR, TYPO } from 'react-native-material-design';
 import AppStore from '../../stores/AppStore';
 import Coastline from '../../coastline';
+var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 export default class FisherOrders extends Component {
    static contextTypes = {
@@ -37,7 +38,7 @@ export default class FisherOrders extends Component {
                }}
                value={this.state.filter} />
 
-            <View style={styles.tabSwitchContainer}>
+            {/*<View style={styles.tabSwitchContainer}>
                <View style={{flexDirection: 'row'}}>
                   <View style={{flexDirection: 'column', flex: 0.5}}>
                      <Button text="AVAILABLE" primary={theme} theme="dark" raised/>
@@ -46,9 +47,10 @@ export default class FisherOrders extends Component {
                      <Button text="RESERVED" primary={theme} raised onPress={()=> { navigator.to('reservedorders') }}/>
                   </View>
                </View>
-            </View>
+            </View>*/}
 
-            {
+            <ScrollableTabView>
+            <View tabLabel="Available">{
                function(self) {
                   return Coastline.fisher.available.get(self, self.state.filter || "").map(function(member) {
                      return (
@@ -70,7 +72,32 @@ export default class FisherOrders extends Component {
                      );
                   });
                }(this)
-            }
+            }</View>
+            <View tabLabel="Reserved">{
+               function(self) {
+                  return Coastline.fisher.available.get(self, self.state.filter || "").map(function(member) {
+                     return (
+                        <Card>
+                           <Card.Body>
+                              <View style={styles.column}>
+                                 <View style={styles.row}>
+                                    <Text style={{fontSize:20, flex:0.7}}> {member.name + ", " + member.weight + member.units} </Text>
+                                    <Text style={{fontSize:12, flex:0.3, textAlign: 'right'}}> {Coastline.dateToString(member.date)} </Text>
+                                 </View>
+                              </View>
+                              <Text> Delivery Zone: {member.zone} </Text>
+                              <Text> Order Requested for {member.weight + member.units} of {member.name}. </Text>
+                           </Card.Body>
+                           <Card.Actions position="right">
+                              <Button value="VIEW DETAILS" primary={theme}  onPress={() => { navigator.forward('productdetail', undefined, {product: member}) }}/>
+                           </Card.Actions>
+                        </Card>
+                     );
+                  });
+               }(this)
+            }</View>
+            </ScrollableTabView>
+
          </ScrollView>
       );
    }

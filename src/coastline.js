@@ -1,4 +1,38 @@
+var baseUrl = 'http://10.16.14.31:9000';
+
 var local = {
+   apiRequest: function (url, method, body) {
+      return fetch(baseUrl + url, {
+         method: method,
+         headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NzkzYzFlMTc5YTZkYmI2M2NmOGVmMDQiLCJpYXQiOjE0NjkzMTE2NDY1ODUsImV4cCI6MTQ3MTkwMzY0NjU4NX0.fuob0CppR5sjgd6SUjXaH8hadF1yOY_l4McuJ5_L9XE',
+         },
+         body: JSON.stringify(body)
+      }).then((res) => res.json()).catch((error) => {
+         console.error(error);
+      });
+
+      // console.log('here');
+      // callback();
+   },
+   itemTotals: function(item) {
+      var grand = 0, total = 0, tax = 0;
+      total = item.weight*item.priceCoastline + item.feeLogistics;
+      tax = item.weight*item.priceCoastline*item.taxRate;
+      grand = total + tax;
+
+      total = Math.round(total*100)/100;
+      tax = Math.round(tax*100)/100;
+      grand = Math.round(grand*100)/100;
+
+      return {
+         total,
+         tax,
+         grand
+      };
+   },
    fisher: {
       available: new Channel("available"),
       reserved: new Channel("reserved"),

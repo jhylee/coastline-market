@@ -15,7 +15,7 @@ export default class Navigation extends Component {
         Coastline.fisher.reserved.subscribe(this);
 
         this.state = {
-            route: null,
+          route: null,
         }
     }
 
@@ -23,7 +23,7 @@ export default class Navigation extends Component {
         const { drawer, navigator } = this.context;
 
         this.setState({
-            route: path
+          route: path
         });
         navigator.to(path, name);
         drawer.closeDrawer();
