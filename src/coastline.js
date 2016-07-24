@@ -25,6 +25,10 @@ var local = {
          grand,
       };
    },
+   dateToString: function(date) {
+      var s = date.toString().split(" ");
+      return s[0] + " " + s[1] + " " + s[2] + ", " + s[4];
+   },
    fisher: {
       available: new Channel("available"),
       reserved: new Channel("reserved"),
@@ -42,10 +46,6 @@ var local = {
    restaurant: {
       available: new Channel("orders"),
       history: new Channel("history"),
-   },
-   dateToString: function(date) {
-      var s = date.toString().split(" ");
-      return s[0] + " " + s[1] + " " + s[2] + ", " + s[4];
    },
 };
 
