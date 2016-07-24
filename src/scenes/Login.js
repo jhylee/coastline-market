@@ -1,6 +1,7 @@
 import React, { Component, View, PropTypes, Image, Text, TextInput } from 'react-native';
 import { Avatar, Subheader, COLOR, IconToggle, Icon, Button, Card } from 'react-native-material-design';
 import AppStore from '../stores/AppStore';
+import AuthActions from '../actions/AuthActions';
 
 export default class Login extends Component {
 
@@ -20,6 +21,20 @@ export default class Login extends Component {
 		this.setState({[badge]: this.state[badge] + 1});
 	};
 
+	login = () => {
+		const { navigator } = this.context;
+		console.log(this.state.email + " " + this.state.password);
+		AuthActions.login(this.state.email, this.state.password).then((accountClass) => {
+			if (accountClass == 'userSupplier') {
+				navigator.to('fisherorders');
+			} else if (accountClass == 'userPurchaser') {
+				navigator.to('restaurants');
+			} else {
+				console.log('Invalid credentials')
+			}
+		})
+	}
+
 	render() {
 		const { navigator } = this.context;
 		const theme = AppStore.getState().theme;
@@ -30,17 +45,22 @@ export default class Login extends Component {
 						<Card.Body>
 							<View style={styles.row}>
 							<TextInput
-	               name="email"
+						name="email"
+						value={this.state.email}
+						onChangeText={(text) => {
+							this.state.email = text;
+							this.setState(this.state);
+						}}
 	               style={styles.textInput}
 								 keyboardType="email-address"
 	               placeholder={'Your Email'} />
-								 <TextInput
-	 	               name="email"
-	 	               style={styles.textInput}
-	 								 keyboardType="numeric"
-	 	               placeholder={'Your Phone Number'} />
 							<TextInput
 								 name="password"
+								 value={this.state.password}
+								 onChangeText={(text) => {
+									 this.state.password = text;
+									 this.setState(this.state);
+								 }}
 								 style={styles.textInput}
 								 secureTextEntry={true}
 								 placeholder={'Your Password'} />
@@ -53,7 +73,7 @@ export default class Login extends Component {
 						</Card.Actions>
 			</Card>
 					<View style={{flexDirection: 'column', flex: 1}}>
-						<Button value="SIGN UP/LOG IN" onPress={() => { navigator.to('fisherorders') }} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
+						<Button value="SIGN UP/LOG IN" onPress={() => { this.login() }} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
 					</View>
 			</View>
 		);

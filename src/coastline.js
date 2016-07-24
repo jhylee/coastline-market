@@ -3,12 +3,51 @@ if (!window.location) {
 }
 
 var io = require('socket.io-client/socket.io');
-var socket = io('10.16.20.126:8999', {transports: ['websocket'], jsonp: false});
+var socket = io('10.16.14.31:8999', {transports: ['websocket'], jsonp: false});
+var store = require('react-native-simple-store');
+
 socket.on("token", function() {
    socket.emit("token", {token: 123123});
 });
 
+var baseUrl = 'http://10.16.14.31:9000';
+
 var local = {
+   apiRequest: function (url, method, body) {
+      return fetch(baseUrl + url, {
+         method: method,
+         headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(body)
+      }).then((res) => {
+         console.log(res);
+         return res.json()
+      }).catch((error) => {
+         console.error(error);
+      });
+
+      // console.log('here');
+      // callback();
+   },
+   apiRequestWithToken: function (url, method, body) {
+      return store.get('token').then((value) => {
+         if (value) {
+            return fetch(baseUrl + url, {
+               method: method,
+               headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + value,
+               },
+               body: JSON.stringify(body)
+            }).then((res) => res.json()).catch((error) => {
+               console.error(error);
+            });
+         };
+      })
+   },
    itemTotals: function(item) {
       var grand = 0, total = 0, tax = 0;
       total = item.weight*item.priceCoastline + item.feeLogistics;
