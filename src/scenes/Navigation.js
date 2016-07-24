@@ -47,7 +47,7 @@ export default class Navigation extends Component {
                         icon: 'local-offer',
                         value: 'Available Orders',
                         active: !route || route === 'fisherorders',
-                        label: ''+ Coastline.fisher.available.get(this, "").length,
+                        label: '' + Coastline.fisher.available.get(this, "").length,
                         onPress: () => this.changeScene('fisherorders'),
                         onLongPress: () => this.changeScene('fisherorders')
                     }, {

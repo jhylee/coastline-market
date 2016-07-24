@@ -43,16 +43,21 @@ export default class Login extends Component {
 							<View style={styles.row}>
 							<TextInput
 	               name="email"
+						value={this.state.email}
+						onChangeText={(text) => {
+							this.state.email = text;
+							this.setState(this.state);
+						}}
 	               style={styles.textInput}
 								 keyboardType="email-address"
 	               placeholder={'Your Email'} />
-								 <TextInput
-	 	               name="email"
-	 	               style={styles.textInput}
-	 								 keyboardType="numeric"
-	 	               placeholder={'Your Phone Number'} />
 							<TextInput
 								 name="password"
+								 value={this.state.password}
+								 onChangeText={(text) => {
+									 this.state.password = text;
+									 this.setState(this.state);
+								 }}
 								 style={styles.textInput}
 								 secureTextEntry={true}
 								 placeholder={'Your Password'} />
@@ -65,7 +70,7 @@ export default class Login extends Component {
 						</Card.Actions>
 			</Card>
 					<View style={{flexDirection: 'column', flex: 1}}>
-						<Button value="SIGN UP/LOG IN" onPress={this.login} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
+						<Button value="LOGIN" onPress={this.login} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}/>
 					</View>
 			</View>
 		);
