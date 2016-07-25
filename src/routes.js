@@ -1,12 +1,12 @@
 export default {
    login: {
-      initialRoute: true,
       title: 'Login',
       component:require('./scenes/Login').default,
    },
 
    // Fishery Pages
    fisherorders: {
+      initialRoute: true,
       title: 'Coastline Market',
       component: require('./scenes/fisher/FisherOrders').default,
       children: {

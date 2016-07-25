@@ -1,4 +1,4 @@
-import React, { Component, ScrollView, View, Text, WebView, Image, TouchableHighlight, PropTypes, MapView } from 'react-native';
+import React, { Component, ScrollView, View, Text, WebView, Image, TouchableHighlight, PropTypes } from 'react-native';
 import { Button, Card, Divider, COLOR, TYPO, Icon  } from 'react-native-material-design';
 import AppStore from '../../stores/AppStore';
 import Coastline from '../../coastline';
@@ -31,14 +31,14 @@ export default class ProductDetail extends Component {
                      <Text> Coastline Price: ${this.state.product.priceCoastline}/{this.state.product.units} </Text>
                   </Card.Body>
                   <Divider />
-                  <View style={{flexDirection: 'row'}}>
+                  {/*<View style={{flexDirection: 'row'}}>
                      <Text style={{flexDirection:'column', flex:0.5}}>Logistics Fee</Text>
                      <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right'}}>- ${this.state.product.feeLogistics}</Text>
                   </View>
                   <View style={{flexDirection: 'row'}}>
                      <Text style={{flexDirection:'column', flex:0.5}}>Taxes</Text>
                      <Text style={{flexDirection:'column', flex:0.5, textAlign: 'right'}}>- ${Coastline.itemTotals(this.state.product).tax}</Text>
-                  </View>
+                  </View>*/}
                   <Divider />
                   <View style={{flexDirection: 'row'}}>
                      <Text style={{flexDirection:'column', flex:0.5, fontWeight: '500'}}>Total</Text>
@@ -49,22 +49,6 @@ export default class ProductDetail extends Component {
                   </Card.Actions>
                </Card>
                <Card>
-                  <MapView
-                     style={{height: 200, margin: 0}}
-                     region={{
-                        latitude: 39.06,
-                        longitude: -95.22,
-                     }}
-                     overlays={[{
-                        coordinates:[
-                           {latitude: 32.47, longitude: -107.85},
-                           {latitude: 45.13, longitude: -94.48 },
-                           {latitude: 39.27, longitude: -83.25 },
-                           {latitude: 32.47, longitude: -107.85},
-                        ],
-                        strokeColor: '#f007',
-                        lineWidth: 3,
-                     }]}/>
                   <Card.Actions position="right">
                      <View style ={{paddingTop: 10, paddingLeft: 5}}></View>
                      <Button value="GET MAP DIRECTIONS" primary={theme}  />
@@ -75,14 +59,8 @@ export default class ProductDetail extends Component {
                      <Button onPress={()=> {navigator.back()}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} raised={true}/>
                   </View>
                   <View style={{flexDirection: 'column', flex: 0.5}}>
-                     <Button value={Coastline.fisher.reserved.contains(this.state.product) ? "REMOVE" : "ACCEPT"} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}
+                     <Button value={this.state.product.reserved ? "REMOVE" : "ACCEPT"} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}
                         onPress={() => {
-                           if (this.state.product.reserved) {
-                              Coastline.fisher.removeReserved(this.state.product);
-                           }
-                           else {
-                              Coastline.fisher.addReserved(this.state.product);
-                           }
                            navigator.back();
                         }}
                      />
@@ -104,5 +82,5 @@ const styles = {
       fontSize: 18,
       textAlign: 'center',
       margin: 16
-   }
+   },
 };

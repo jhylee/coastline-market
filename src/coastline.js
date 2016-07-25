@@ -1,196 +1,91 @@
-if (!window.location) {
-   window.navigator.userAgent = 'ReactNative';
+var contexts = [];
+var filter = "";
+var fisher = {
+   available: [],
+   reserved: [],
+};
+
+function testFilter(string, filter) {
+   for (var i = 0; i < string.length; ++i) {
+      var match = true;
+
+      for (var j = 0; j < filter.length; ++j) {
+         if (i + j >= string.length || string[i + j] != filter[j]) {
+            match = false;
+            break;
+         }
+      }
+
+      if (match) return true;
+   }
+
+   return false;
 }
 
-var io = require('socket.io-client/socket.io');
-var socket = io('10.16.14.31:8999', {transports: ['websocket'], jsonp: false});
-var store = require('react-native-simple-store');
+function setState(context) {
+   context.setState(context.state);
+}
 
-socket.on("token", function() {
-   socket.emit("token", {token: 123123});
-});
-
-var baseUrl = 'http://10.16.14.31:9000';
-
+// coastline object
 var local = {
-   apiRequest: function (url, method, body) {
-      return fetch(baseUrl + url, {
-         method: method,
-         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(body)
-      }).then((res) => {
-         console.log(res);
-         return res.json()
-      }).catch((error) => {
-         console.error(error);
-      });
+   fisher: {
+      getAvailable: function() {
+         var result = [];
 
-      // console.log('here');
-      // callback();
-   },
-   apiRequestWithToken: function (url, method, body) {
-      return store.get('token').then((value) => {
-         if (value) {
-            return fetch(baseUrl + url, {
-               method: method,
-               headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + value,
-               },
-               body: JSON.stringify(body)
-            }).then((res) => res.json()).catch((error) => {
-               console.error(error);
-            });
-         };
-      })
-   },
-   itemTotals: function(item) {
-      var grand = 0, total = 0, tax = 0;
-      total = item.weight*item.priceCoastline + item.feeLogistics;
-      tax = item.weight*item.priceCoastline*item.taxRate;
-      grand = total + tax;
+         fisher.available.map(function(item) {
+            if (testFilter(item.name.toLowerCase(), filter.toLowerCase()) ||
+                testFilter(item.zone.toLowerCase(), filter.toLowerCase()) ||
+                testFilter(item.date.toString().toLowerCase(), filter.toLowerCase()))
+               result.push(item);
+         });
 
-      total = Math.round(total*100)/100;
-      tax = Math.round(tax*100)/100;
-      grand = Math.round(grand*100)/100;
+         return result;
+      },
+      getReserved: function() {
+         var result = [];
 
-      return {
-         total,
-         tax,
-         grand,
-      };
+         fisher.reserved.map(function(item) {
+            if (testFilter(item.name.toLowerCase(), filter.toLowerCase()) ||
+                testFilter(item.zone.toLowerCase(), filter.toLowerCase()) ||
+                testFilter(item.date.toString().toLowerCase(), filter.toLowerCase()))
+               result.push(item);
+         });
+
+         return result;
+      },
    },
+   addContext: function(context) {
+      if (contexts.indexOf(context) == -1) {
+         contexts.push(context);
+      }
+
+      return context;
+   },
+   removeContext: function(context) {
+      if (contexts.indexOf(context) != -1) {
+         contexts.splice(contexts.indexOf(context), 1);
+      }
+
+      return context;
+   },
+   setFilter: function(newfilter) {
+      filter = newfilter;
+      contexts.map(setState);
+   },
+
+   // helper
    dateToString: function(date) {
       var s = date.toString().split(" ");
       return s[0] + " " + s[1] + " " + s[2] + ", " + s[4];
    },
-   fisher: {
-      available: new Channel("available"),
-      reserved: new Channel("reserved"),
-      addReserved: function(item) {
-         item.reserved = new Date();
-         local.fisher.available.remove(item);
-         local.fisher.reserved.push(item);
-      },
-      removeReserved: function(item) {
-         item.reserved = undefined;
-         local.fisher.reserved.remove(item);
-         local.fisher.available.push(item);
-      },
-   },
-   restaurant: {
-      available: new Channel("orders"),
-      history: new Channel("history"),
+   itemTotals: function(item) {
+      return {
+         grand: Math.round(item.weight*item.priceCoastline*100)/100,
+      };
    },
 };
 
 export default local;
-
-function Channel(title) {
-   var global = this;
-
-   this.title = title;
-   this.data = [];
-   this.subscriptions = [];
-
-   function getSubscription(context) {
-      var result;
-
-      global.subscriptions.map(function(item) {
-         if (item.context == context)
-            result = item;
-      });
-
-      return result;
-   }
-
-   this.subscribe = function(context) {
-      var subscription = getSubscription(context);
-
-      if (!subscription) {
-         global.subscriptions.push(new Subscription(context, this));
-      }
-
-      return context;
-   };
-   this.unsubscribe = function(context) {
-      var subscription = getSubscription(context);
-
-      if (subscription) {
-         global.subscriptions.splice(global.subscriptions.indexOf(subscription), 1);
-      }
-
-      return context;
-   };
-   this.get = function(context, filter) {
-      var subscription = getSubscription(context);
-
-      if (subscription) {
-         subscription.state[global.title].splice(0, subscription.state[global.title].length);
-         filter = filter.toLowerCase();
-
-         function testFilter(string, filter) {
-            for (var i = 0; i < string.length; ++i) {
-               var match = true;
-
-               for (var j = 0; j < filter.length; ++j) {
-                  if (i + j >= string.length || string[i + j] != filter[j]) {
-                     match = false;
-                     break;
-                  }
-               }
-
-               if (match) return true;
-            }
-
-            return false;
-         }
-
-         global.data.map(function(item) {
-            if (testFilter(item.name.toLowerCase(), filter) ||
-                testFilter(item.zone.toLowerCase(), filter)) {
-
-               subscription.state[global.title].push(item);
-            }
-         });
-
-         return subscription.state[global.title];
-      }
-      else {
-         return false;
-      }
-   };
-   this.push = function(item) {
-      global.data.unshift(item);
-      global.subscriptions.map(setState);
-   };
-   this.remove = function(item) {
-      if (global.data.indexOf(item) != -1) {
-         global.data.splice(global.data.indexOf(item), 1);
-      }
-   };
-   this.contains = function(item) {
-      return global.data.indexOf(item) != -1;
-   };
-}
-
-function Subscription(context, channel) {
-   this.context = context;
-   this.channel = channel;
-   this.context.state = this.context.state || {};
-   this.context.state[this.channel.title] = [];
-
-   // ref
-   this.state = this.context.state;
-}
-
-function setState(subscription) {
-   subscription.context.setState(subscription.context.state);
-}
 
 for (var i = 0; i < 10; ++i) {
    var name = ""
@@ -198,7 +93,7 @@ for (var i = 0; i < 10; ++i) {
       if (Math.random() > 0.9)
          name += char;
    });
-   local.fisher.available.push({
+   fisher.available.push({
       // fisher orders
       name: name,
       weight: Math.round(Math.random()*1000),
@@ -213,21 +108,21 @@ for (var i = 0; i < 10; ++i) {
       taxRate: 0.13,
 
       // reserved details
-      reserved: undefined,
+      reserved: false,
    });
 }
 
 for (var i = 0; i < 10; ++i) {
    var name = ""
-   "oFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoFoF".split("").map(function(char) {
+   "oFoFOFffOfoooFFofo".split("").map(function(char) {
       if (Math.random() > 0.9)
          name += char;
    });
-   local.restaurant.available.push({
+   fisher.reserved.push({
       // fisher orders
       name: name,
       weight: Math.round(Math.random()*1000),
-      units: "lb",
+      units: "lbs",
       date: new Date(),
       zone: "Test Area",
 
@@ -236,11 +131,8 @@ for (var i = 0; i < 10; ++i) {
       priceCoastline: Math.round(Math.random()*1000)/100,
       feeLogistics: Math.round(Math.random()*5*200)/100,
       taxRate: 0.13,
-      deliveryTime: new Date(),
-      deliveryTimeMin: -4*1000*60*60,
-      deliveryTimeMax: 4*1000*60*60,
 
       // reserved details
-      reserved: undefined,
+      reserved: true,
    });
 }

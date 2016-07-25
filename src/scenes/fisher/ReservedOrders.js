@@ -10,17 +10,15 @@ export default class ReservedOrders extends Component {
 
    constructor(props) {
       super(props);
-      Coastline.fisher.reserved.subscribe(this);
-
-      this.state.filter = "";
+      Coastline.addContext(this);
    }
 
    componentDidMount() {
-      Coastline.fisher.reserved.subscribe(this);
+      Coastline.addContext(this);
    }
 
    componentWillUnmount() {
-      Coastline.fisher.reserved.unsubscribe(this);
+      Coastline.removeContext(this);
    }
 
    render() {
@@ -29,14 +27,6 @@ export default class ReservedOrders extends Component {
 
       return (
          <ScrollView>
-            <TextInput
-               style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-               onChangeText={(text) => {
-                  this.state.filter = text;
-                  this.setState(this.state);
-               }}
-               value={this.state.filter} />
-
             <View style={styles.tabSwitchContainer}>
                <View style={{flexDirection: 'row'}}>
                   <View style={{flexDirection: 'column', flex: 0.5}}>
@@ -50,7 +40,7 @@ export default class ReservedOrders extends Component {
 
             {
                function(self) {
-                  return Coastline.fisher.reserved.get(self, self.state.filter || "").map(function(member) {
+                  return Coastline.fisher.getReserved().map(function(member) {
                      return (
                         <View>
                            <Divider/>
@@ -60,7 +50,7 @@ export default class ReservedOrders extends Component {
                                     {member.name + ", " + member.weight + member.units}
                                  </Text>
                                  <Text style={{flex:0.4, textAlign:'right'}}>
-                                    {Coastline.dateToString(member.reserved)}
+                                    {Coastline.dateToString(member.date)}
                                  </Text>
                               </View>
                            </TouchableHighlight>

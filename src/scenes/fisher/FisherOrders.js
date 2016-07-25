@@ -10,17 +10,15 @@ export default class FisherOrders extends Component {
 
    constructor(props) {
       super(props);
-      Coastline.fisher.available.subscribe(this);
-
-      this.state.filter = "";
+      Coastline.addContext(this);
    }
 
    componentDidMount() {
-      Coastline.fisher.available.subscribe(this);
+      Coastline.addContext(this);
    }
 
    componentWillUnmount() {
-      Coastline.fisher.available.unsubscribe(this);
+      Coastline.removeContext(this);
    }
 
    render() {
@@ -29,14 +27,6 @@ export default class FisherOrders extends Component {
 
       return (
          <ScrollView>
-            <TextInput
-               style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-               onChangeText={(text) => {
-                  this.state.filter = text;
-                  this.setState(this.state);
-               }}
-               value={this.state.filter} />
-
             <View style={styles.tabSwitchContainer}>
                <View style={{flexDirection: 'row'}}>
                   <View style={{flexDirection: 'column', flex: 0.5}}>
@@ -50,7 +40,7 @@ export default class FisherOrders extends Component {
 
             {
                function(self) {
-                  return Coastline.fisher.available.get(self, self.state.filter || "").map(function(member) {
+                  return Coastline.fisher.getAvailable().map(function(member) {
                      return (
                         <Card>
                            <Card.Body>

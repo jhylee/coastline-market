@@ -11,9 +11,8 @@ export default class Navigation extends Component {
 
     constructor(props) {
         super(props);
-        Coastline.fisher.available.subscribe(this);
-        Coastline.fisher.reserved.subscribe(this);
-
+        Coastline.addContext(this);
+        
         this.state = {
             route: null,
         }
@@ -47,14 +46,14 @@ export default class Navigation extends Component {
                         icon: 'local-offer',
                         value: 'Available Orders',
                         active: !route || route === 'fisherorders',
-                        label: ''+ Coastline.fisher.available.get(this, "").length,
+                        label: ''+ Coastline.fisher.getAvailable().length,
                         onPress: () => this.changeScene('fisherorders'),
                         onLongPress: () => this.changeScene('fisherorders')
                     }, {
                         icon: 'assignment-turned-in',
                         value: 'Reserved Orders',
                         active: route === 'buttons',
-                        label: ''+ Coastline.fisher.reserved.get(this, "").length,
+                        label: ''+ Coastline.fisher.getReserved().length,
                         onPress: () => this.changeScene('reservedorders'),
                         onLongPress: () => this.changeScene('reservedorders')
                     }, {
