@@ -1,5 +1,5 @@
-import React, { Component, ScrollView, PropTypes, View, Text, Image, IntentAndroid, TextInput } from 'react-native';
-import { Card, Button, COLOR, TYPO } from 'react-native-material-design';
+import React, { Component, PropTypes, View, ScrollView, Text, IntentAndroid, InteractionManager, Alert, TouchableNativeFeedback, TouchableHighlight, TextInput } from 'react-native';
+import { Button, Subheader, TYPO, COLOR, Divider, Card } from 'react-native-material-design';
 import AppStore from '../../stores/AppStore';
 import Coastline from '../../coastline';
 
@@ -26,18 +26,7 @@ export default class FisherOrders extends Component {
       const { navigator } = this.context;
 
       return (
-         <ScrollView>
-            <View style={styles.tabSwitchContainer}>
-               <View style={{flexDirection: 'row'}}>
-                  <View style={{flexDirection: 'column', flex: 0.5}}>
-                     <Button text="AVAILABLE" primary={theme} theme="dark" raised/>
-                  </View>
-                  <View style={{flexDirection: 'column', flex: 0.5}}>
-                     <Button text="RESERVED" primary={theme} raised onPress={()=> { navigator.to('reservedorders') }}/>
-                  </View>
-               </View>
-            </View>
-
+         <View>
             {
                function(self) {
                   return Coastline.fisher.getAvailable().map(function(member) {
@@ -61,7 +50,7 @@ export default class FisherOrders extends Component {
                   });
                }(this)
             }
-         </ScrollView>
+         </View>
       );
    }
 }

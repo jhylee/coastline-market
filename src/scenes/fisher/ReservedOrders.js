@@ -26,18 +26,7 @@ export default class ReservedOrders extends Component {
       const { navigator } = this.context;
 
       return (
-         <ScrollView>
-            <View style={styles.tabSwitchContainer}>
-               <View style={{flexDirection: 'row'}}>
-                  <View style={{flexDirection: 'column', flex: 0.5}}>
-                     <Button text="AVAILABLE" primary={theme} raised onPress={()=> { navigator.to('fisherorders') }}/>
-                  </View>
-                  <View style={{flexDirection: 'column', flex: 0.5}}>
-                     <Button text="RESERVED" primary={theme} theme="dark" raised/>
-                  </View>
-               </View>
-            </View>
-
+         <View>
             {
                function(self) {
                   return Coastline.fisher.getReserved().map(function(member) {
@@ -59,7 +48,7 @@ export default class ReservedOrders extends Component {
                   });
                }(this)
             }
-         </ScrollView>
+         </View>
       );
    }
 }

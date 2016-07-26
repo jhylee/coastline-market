@@ -4,30 +4,6 @@ export default {
       component:require('./scenes/Login').default,
    },
 
-   // Fishery Pages
-   fisherorders: {
-      initialRoute: true,
-      title: 'Coastline Market',
-      component: require('./scenes/fisher/FisherOrders').default,
-      children: {
-         productdetail: {
-            title: 'Product Details', // optional
-            component: require('./scenes/fisher/ProductDetail').default
-         },
-      },
-   },
-
-   reservedorders: {
-      title: 'Reserved Orders',
-      component: require('./scenes/fisher/ReservedOrders').default,
-      children: {
-         productdetail: {
-            title: 'Product Details', // optional
-            component: require('./scenes/fisher/ProductDetail').default
-         },
-      },
-   },
-
    themes: {
       title: 'Change Theme',
       component: require('./scenes/Themes').default
@@ -36,6 +12,23 @@ export default {
    settings: {
       title: 'Settings',
       component: require('./scenes/fisher/Settings').default
+   },
+
+   fisher: {
+      initialRoute: true,
+      title: 'Fisher Market',
+      component: require('./scenes/Fisher').default,
+      children: {
+         productdetail: {
+            title: 'Product Details', // optional
+            component: require('./scenes/fisher/ProductDetail').default
+         },
+      },
+   },
+
+   restaurant: {
+      title: 'Restaurant',
+      component: require('./scenes/Restaurant').default,
    },
 
    // Restaurant Pages

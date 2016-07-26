@@ -12,19 +12,19 @@ export default class Navigation extends Component {
     constructor(props) {
         super(props);
         Coastline.addContext(this);
-        
+
         this.state = {
             route: null,
         }
     }
 
-    changeScene = (path, name) => {
+    changeScene = (path, name, props) => {
         const { drawer, navigator } = this.context;
 
         this.setState({
             route: path
         });
-        navigator.to(path, name);
+        navigator.to(path, name, props);
         drawer.closeDrawer();
     };
 
@@ -47,15 +47,15 @@ export default class Navigation extends Component {
                         value: 'Available Orders',
                         active: !route || route === 'fisherorders',
                         label: ''+ Coastline.fisher.getAvailable().length,
-                        onPress: () => this.changeScene('fisherorders'),
-                        onLongPress: () => this.changeScene('fisherorders')
+                        onPress: () => this.changeScene('fisher', undefined, {tab: 0}),
+                        onLongPress: () => this.changeScene('fisher', undefined, {tab: 0}),
                     }, {
                         icon: 'assignment-turned-in',
                         value: 'Reserved Orders',
                         active: route === 'buttons',
                         label: ''+ Coastline.fisher.getReserved().length,
-                        onPress: () => this.changeScene('reservedorders'),
-                        onLongPress: () => this.changeScene('reservedorders')
+                        onPress: () => this.changeScene('fisher', undefined, {tab: 1}),
+                        onLongPress: () => this.changeScene('fisher', undefined, {tab: 1}),
                     }, {
                       icon: 'palette',
                       value: 'Application Theme',
@@ -72,21 +72,21 @@ export default class Navigation extends Component {
                         icon: 'whatshot',
                         value: 'Make an Order',
                         active: route === 'restaurants',
-                        onPress: () => this.changeScene('restaurants'),
-                        onLongPress: () => this.changeScene('restaurants')
+                        onPress: () => this.changeScene('restaurant', undefined, {tab: 0}),
+                        onLongPress: () => this.changeScene('restaurant', undefined, {tab: 0}),
                     },
                     {
                       icon: 'history',
                       value: 'Order History',
                       active: route === 'orderhistory',
-                      onPress: () => this.changeScene('orderhistory'),
-                      onLongPress: () => this.changeScene('orderhistory')
+                      onPress: () => this.changeScene('restaurant', undefined, {tab: 1}),
+                      onLongPress: () => this.changeScene('restaurant', undefined, {tab: 1}),
                     }, {
                       icon: 'payment',
                       value: 'Payment',
                       active: route === 'payment',
-                      onPress: () => this.changeScene('payment'),
-                      onLongPress: () => this.changeScene('payment')
+                      onPress: () => this.changeScene('restaurant', undefined, {tab: 2}),
+                      onLongPress: () => this.changeScene('restaurant', undefined, {tab: 2}),
                     }
                   ]}
                 />
