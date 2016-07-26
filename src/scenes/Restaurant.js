@@ -44,9 +44,9 @@ export default class Restaurant extends Component {
                                  style={{
                                     flexDirection:'column',
                                     height: 30,
-                                    width: Dimensions.get('window').width/context.tabs.length,
+                                    flex: 1,
                                     borderBottomColor: '#fff',
-                                    borderBottomWidth: (context.activeTab == i ? 3 : 0)
+                                    borderBottomWidth: (context.activeTab == i ? 3 : 0),
                                  }}
                                  onPress={() => {
                                     context.goToPage(i);
@@ -69,7 +69,8 @@ export default class Restaurant extends Component {
             }}>
 
             <ScrollView tabLabel='AVAILABLE'><AvailableOrders /></ScrollView>
-            <ScrollView tabLabel='RESERVED'><Cart /></ScrollView>
+            <ScrollView tabLabel='HISTORY'><OrderHistory /></ScrollView>
+            <ScrollView tabLabel='CART'><Cart /></ScrollView>
          </ScrollableTabView>
       );
    }

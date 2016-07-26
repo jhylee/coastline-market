@@ -16,17 +16,15 @@ export default class AvailableOrders extends Component {
 			badgeThree: 9
 		};
 
-      Coastline.restaurant.available.subscribe(this);
-
-      this.state.filter = "";
+      Coastline.addContext(this);
    }
 
    componentDidMount() {
-      Coastline.restaurant.available.subscribe(this);
+      Coastline.addContext(this);
    }
 
    componentWillUnmount() {
-      Coastline.restaurant.available.unsubscribe(this);
+      Coastline.removeContext(this);
    }
 
 	incrementBadge = (badge) => {
@@ -39,19 +37,9 @@ export default class AvailableOrders extends Component {
 
 		return (
 			<ScrollView>
-   			<View style={{backgroundColor:'#FFF', margin: 5, borderRadius: 2, elevation: 1, paddingHorizontal: 20}}>
-               <TextInput
-                  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                  onChangeText={(text) => {
-                     this.state.filter = text;
-                     this.setState(this.state);
-                  }}
-                  value={this.state.filter} />
-   			</View>
-
             {
                function(self) {
-                  return Coastline.restaurant.available.get(self, self.state.filter || "").map(function(member) {
+                  return Coastline.restaurant.getAvailable().map(function(member) {
                      return (
                         <Card>
          						<Card.Media

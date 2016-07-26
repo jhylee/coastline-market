@@ -4,6 +4,11 @@ var fisher = {
    available: [],
    reserved: [],
 };
+var restaurant = {
+   available: [],
+   history: [],
+   cart: [],
+};
 
 function testFilter(string, filter) {
    for (var i = 0; i < string.length; ++i) {
@@ -52,6 +57,48 @@ var local = {
          });
 
          return result;
+      },
+      reserve: function(product) {
+         var i;
+         if ((i = fisher.available.indexOf(product)) != -1) {
+            fisher.available.splice(i, 1);
+            fisher.reserved.push(product);
+         }
+         else if ((i = fisher.reserved.indexOf(product)) != -1) {
+            fisher.reserved.splice(i, 1);
+            fisher.available.push(product);
+         }
+
+         product.reserved = !product.reserved;
+      },
+   },
+   restaurant: {
+      getAvailable: function() {
+         var result = [];
+
+         restaurant.available.map(function(item) {
+            if (testFilter(item.name.toLowerCase(), filter.toLowerCase()) ||
+                testFilter(item.zone.toLowerCase(), filter.toLowerCase()) ||
+                testFilter(item.date.toString().toLowerCase(), filter.toLowerCase()))
+               result.push(item);
+         });
+
+         return result;
+      },
+      getHistory: function() {
+         var result = [];
+
+         restaurant.history.map(function(item) {
+            if (testFilter(item.name.toLowerCase(), filter.toLowerCase()) ||
+                testFilter(item.zone.toLowerCase(), filter.toLowerCase()) ||
+                testFilter(item.date.toString().toLowerCase(), filter.toLowerCase()))
+               result.push(item);
+         });
+
+         return result;
+      },
+      getCart: function() {
+         return restaurant.cart;
       },
    },
    addContext: function(context) {
@@ -114,11 +161,11 @@ for (var i = 0; i < 10; ++i) {
 
 for (var i = 0; i < 10; ++i) {
    var name = ""
-   "oFoFOFffOfoooFFofo".split("").map(function(char) {
+   "TESTESTESTSETSETsetsetsetset".split("").map(function(char) {
       if (Math.random() > 0.9)
          name += char;
    });
-   fisher.reserved.push({
+   restaurant.available.push({
       // fisher orders
       name: name,
       weight: Math.round(Math.random()*1000),
@@ -133,6 +180,6 @@ for (var i = 0; i < 10; ++i) {
       taxRate: 0.13,
 
       // reserved details
-      reserved: true,
+      reserved: false,
    });
 }

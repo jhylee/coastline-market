@@ -40,7 +40,7 @@ export default class Fisher extends Component {
                                  style={{
                                     flexDirection:'column',
                                     height: 30,
-                                    width: Dimensions.get('window').width/context.tabs.length,
+                                    flex: 1,
                                     borderBottomColor: '#fff',
                                     borderBottomWidth: (context.activeTab == i ? 3 : 0)
                                  }}
