@@ -42,7 +42,7 @@ var local = {
             // temp code
             if (typeof item.product === "undefined" || item.product == null) {
                item.product = {
-                  name: "Test",
+                  name: item._id.slice(item._id.length - 5),
                   sellingPrice: 99.99,
                   purchasePrice: 99.99,
                };
@@ -51,6 +51,10 @@ var local = {
             if (testFilter(item.product.name.toLowerCase(), filter)) {
                result.push(item);
             }
+         });
+
+         result.sort(function(a, b) {
+            return new Date(b.order.date) - new Date(a.order.date);
          });
 
          return result;
@@ -62,7 +66,7 @@ var local = {
             // temp code
             if (typeof item.product === "undefined" || item.product == null) {
                item.product = {
-                  name: "Test",
+                  name: item._id.slice(item._id.length - 5),
                   sellingPrice: 99.99,
                   purchasePrice: 99.99,
                };
@@ -71,6 +75,10 @@ var local = {
             if (testFilter(item.product.name.toLowerCase(), filter)) {
                result.push(item);
             }
+         });
+
+         result.sort(function(a, b) {
+            return new Date(b.order.date) - new Date(a.order.date);
          });
 
          return result;
