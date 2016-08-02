@@ -25,49 +25,7 @@ export default class Restaurant extends Component {
       const { navigator } = this.context;
 
       return (
-         <ScrollableTabView
-            renderTabBar={(context) => {
-               return (
-                  <View
-                     style={{
-                        elevation: 4,
-                        height: 30,
-                        flexWrap: 'wrap',
-                        alignItems: 'flex-start',
-                        flexDirection:'row',
-                        backgroundColor: COLOR[AppStore.state.theme+""+500].color,
-                     }}>
-                     {
-                        context.tabs.map(function(tab, i) {
-                           return (
-                              <TouchableOpacity
-                                 style={{
-                                    flexDirection:'column',
-                                    height: 30,
-                                    flex: 1,
-                                    borderBottomColor: '#fff',
-                                    borderBottomWidth: (context.activeTab == i ? 3 : 0),
-                                 }}
-                                 onPress={() => {
-                                    context.goToPage(i);
-                                 }}>
-
-                                 <Text
-                                    style={{
-                                       textAlign: "center",
-                                       color: "#fff",
-                                    }}>
-
-                                    {tab}
-                                 </Text>
-                              </TouchableOpacity>
-                           )
-                        })
-                     }
-                  </View>
-               );
-            }}>
-
+         <ScrollableTabView renderTabBar={(context) => Coastline.renderTabBar(context)}>
             <ScrollView tabLabel='AVAILABLE'><AvailableOrders /></ScrollView>
             <ScrollView tabLabel='HISTORY'><OrderHistory /></ScrollView>
             <ScrollView tabLabel='CART'><Cart /></ScrollView>

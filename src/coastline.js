@@ -1,3 +1,7 @@
+import React, { View, Text, TouchableOpacity } from 'react-native';
+import { COLOR } from 'react-native-material-design';
+import AppStore from './stores/AppStore';
+
 var contexts = [];
 var filter = "";
 var fisher = {
@@ -130,6 +134,47 @@ var local = {
          grand: Math.round(item.weight*item.priceCoastline*100)/100,
       };
    },
+   renderTabBar: function(context) {
+      return (
+         <View
+            style={{
+               elevation: 4,
+               height: 30,
+               flexWrap: 'wrap',
+               alignItems: 'flex-start',
+               flexDirection:'row',
+               backgroundColor: COLOR[AppStore.state.theme+""+500].color,
+            }}>
+            {
+               context.tabs.map(function(tab, i) {
+                  return (
+                     <TouchableOpacity
+                        style={{
+                           flexDirection:'column',
+                           height: 30,
+                           flex: 1,
+                           borderBottomColor: '#fff',
+                           borderBottomWidth: (context.activeTab == i ? 3 : 0),
+                        }}
+                        onPress={() => {
+                           context.goToPage(i);
+                        }}>
+
+                        <Text
+                           style={{
+                              textAlign: "center",
+                              color: "#fff",
+                           }}>
+
+                           {tab}
+                        </Text>
+                     </TouchableOpacity>
+                  )
+               })
+            }
+         </View>
+      );
+   }
 };
 
 export default local;
@@ -145,7 +190,7 @@ for (var i = 0; i < 10; ++i) {
       name: name,
       weight: Math.round(Math.random()*1000),
       units: "lbs",
-      date: new Date(),
+      date: new Date(new Date() - Math.random()*1000000),
       zone: "Test Area",
 
       // product details
@@ -170,7 +215,7 @@ for (var i = 0; i < 10; ++i) {
       name: name,
       weight: Math.round(Math.random()*1000),
       units: "lbs",
-      date: new Date(),
+      date: new Date(new Date() - Math.random()*1000000),
       zone: "Test Area",
 
       // product details
