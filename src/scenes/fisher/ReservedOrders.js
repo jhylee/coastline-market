@@ -30,16 +30,21 @@ export default class ReservedOrders extends Component {
             {
                function(self) {
                   return Coastline.fisher.getReserved().map(function(member) {
+                     let name = member.product.name;
+                     let weight = member.quantity;
+                     let units = "lbs";
+                     let date = Coastline.dateToString(member.order.date);
+
                      return (
                         <View>
                            <Divider/>
                            <TouchableHighlight style={styles.column}  underlayColor="#ECEFF1" onPress={()=>{navigator.forward('productdetail', undefined, {product: member})}}>
                               <View style={styles.row}>
                                  <Text style={{textAlign: 'left', flex: 0.6, fontSize:18, fontWeight: '500'}}>
-                                    {member.name + ", " + member.weight + member.units}
+                                    {name + ", " + weight + units}
                                  </Text>
                                  <Text style={{flex:0.4, textAlign:'right'}}>
-                                    {Coastline.dateToString(member.date)}
+                                    {date}
                                  </Text>
                               </View>
                            </TouchableHighlight>

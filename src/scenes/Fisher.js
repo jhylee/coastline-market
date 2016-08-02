@@ -21,7 +21,7 @@ export default class Fisher extends Component {
       const { navigator } = this.context;
 
       return (
-         <ScrollableTabView renderTabBar={(context) => Coastline.renderTabBar(context)}>
+         <ScrollableTabView renderTabBar={(context) => Coastline.renderTabBar(context)} initialPage={this.props.tab || 0}>
             <ScrollView tabLabel='AVAILABLE'><FisherOrders /></ScrollView>
             <ScrollView tabLabel='RESERVED'><ReservedOrders /></ScrollView>
          </ScrollableTabView>

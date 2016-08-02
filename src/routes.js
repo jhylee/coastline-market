@@ -15,6 +15,7 @@ export default {
    },
 
    fisher: {
+      initialRoute: true,
       title: 'Fisher Market',
       component: require('./scenes/Fisher').default,
       children: {
@@ -26,7 +27,6 @@ export default {
    },
 
    restaurant: {
-      initialRoute: true,
       title: 'Restaurant',
       component: require('./scenes/Restaurant').default,
    },

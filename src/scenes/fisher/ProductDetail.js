@@ -19,16 +19,24 @@ export default class ProductDetail extends Component {
       const theme = AppStore.getState().theme;
       const { navigator } = this.context;
 
+      let product = this.state.product;
+      let name = product.product.name;
+      let weight = product.quantity;
+      let units = "lbs";
+      let date = Coastline.dateToString(product.order.date);
+      let priceMarket = product.sellingPrice;
+      let priceCoastline = product.purchasePrice;
+
       return (
          <ScrollView>
             <View>
                <Card>
                   <Card.Body>
                      <Text style={[TYPO.paperFontHeadline, COLOR.paperBlack50]}>
-                        {this.state.product.name}, {this.state.product.weight}{this.state.product.units}
+                        {name}, {weight}{units}
                      </Text>
-                     <Text> Market Price: ${this.state.product.priceMarket}/{this.state.product.units} </Text>
-                     <Text> Coastline Price: ${this.state.product.priceCoastline}/{this.state.product.units} </Text>
+                     <Text> Market Price: ${priceMarket}/{units} </Text>
+                     <Text> Coastline Price: ${priceCoastline}/{units} </Text>
                   </Card.Body>
                   <Divider />
                   {/*<View style={{flexDirection: 'row'}}>

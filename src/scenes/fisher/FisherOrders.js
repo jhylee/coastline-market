@@ -30,17 +30,22 @@ export default class FisherOrders extends Component {
             {
                function(self) {
                   return Coastline.fisher.getAvailable().map(function(member) {
+                     let name = member.product.name;
+                     let weight = member.quantity;
+                     let units = "lbs";
+                     let date = Coastline.dateToString(member.order.date);
+
                      return (
                         <Card>
                            <Card.Body>
                               <View style={styles.column}>
                                  <View style={styles.row}>
-                                    <Text style={{fontSize:20, flex:0.7}}> {member.name + ", " + member.weight + member.units} </Text>
-                                    <Text style={{fontSize:12, flex:0.3, textAlign: 'right'}}> {Coastline.dateToString(member.date)} </Text>
+                                    <Text style={{fontSize:20, flex:0.7}}> {name + ", " + weight + units} </Text>
+                                    <Text style={{fontSize:12, flex:0.3, textAlign: 'right'}}> {date} </Text>
                                  </View>
                               </View>
-                              <Text> Delivery Zone: {member.zone} </Text>
-                              <Text> Order Requested for {member.weight + member.units} of {member.name}. </Text>
+                              <Text> Delivery Zone: TODO </Text>
+                              <Text> Order Requested for {weight + units} of {name}. </Text>
                            </Card.Body>
                            <Card.Actions position="right">
                               <Button value="VIEW DETAILS" primary={theme}  onPress={() => { navigator.forward('productdetail', undefined, {product: member}) }}/>

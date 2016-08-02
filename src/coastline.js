@@ -1,7 +1,27 @@
+/*{
+   // fisher orders
+   name: undefined,
+   weight: undefined,
+   units: "lbs",
+   date: undefined,
+   zone: undefined,
+
+   // product details
+   priceMarket: undefined,
+   priceCoastline: undefined,
+   feeLogistics: undefined,
+   taxRate: undefined,
+
+   // reserved details
+   reserved: undefined,
+}*/
+
+// render tab bar
 import React, { View, Text, TouchableOpacity } from 'react-native';
 import { COLOR } from 'react-native-material-design';
 import AppStore from './stores/AppStore';
 
+// local coastline
 var contexts = [];
 var filter = "";
 var fisher = {
@@ -13,39 +33,24 @@ var restaurant = {
    history: [],
    cart: [],
 };
-
-function testFilter(string, filter) {
-   for (var i = 0; i < string.length; ++i) {
-      var match = true;
-
-      for (var j = 0; j < filter.length; ++j) {
-         if (i + j >= string.length || string[i + j] != filter[j]) {
-            match = false;
-            break;
-         }
-      }
-
-      if (match) return true;
-   }
-
-   return false;
-}
-
-function setState(context) {
-   context.setState(context.state);
-}
-
-// coastline object
 var local = {
    fisher: {
       getAvailable: function() {
          var result = [];
 
          fisher.available.map(function(item) {
-            if (testFilter(item.name.toLowerCase(), filter.toLowerCase()) ||
-                testFilter(item.zone.toLowerCase(), filter.toLowerCase()) ||
-                testFilter(item.date.toString().toLowerCase(), filter.toLowerCase()))
+            // temp code
+            if (typeof item.product === "undefined" || item.product == null) {
+               item.product = {
+                  name: "Test",
+                  sellingPrice: 99.99,
+                  purchasePrice: 99.99,
+               };
+            }
+
+            if (testFilter(item.product.name.toLowerCase(), filter)) {
                result.push(item);
+            }
          });
 
          return result;
@@ -54,10 +59,18 @@ var local = {
          var result = [];
 
          fisher.reserved.map(function(item) {
-            if (testFilter(item.name.toLowerCase(), filter.toLowerCase()) ||
-                testFilter(item.zone.toLowerCase(), filter.toLowerCase()) ||
-                testFilter(item.date.toString().toLowerCase(), filter.toLowerCase()))
+            // temp code
+            if (typeof item.product === "undefined" || item.product == null) {
+               item.product = {
+                  name: "Test",
+                  sellingPrice: 99.99,
+                  purchasePrice: 99.99,
+               };
+            }
+
+            if (testFilter(item.product.name.toLowerCase(), filter)) {
                result.push(item);
+            }
          });
 
          return result;
@@ -81,10 +94,7 @@ var local = {
          var result = [];
 
          restaurant.available.map(function(item) {
-            if (testFilter(item.name.toLowerCase(), filter.toLowerCase()) ||
-                testFilter(item.zone.toLowerCase(), filter.toLowerCase()) ||
-                testFilter(item.date.toString().toLowerCase(), filter.toLowerCase()))
-               result.push(item);
+            result.push(item);
          });
 
          return result;
@@ -93,10 +103,7 @@ var local = {
          var result = [];
 
          restaurant.history.map(function(item) {
-            if (testFilter(item.name.toLowerCase(), filter.toLowerCase()) ||
-                testFilter(item.zone.toLowerCase(), filter.toLowerCase()) ||
-                testFilter(item.date.toString().toLowerCase(), filter.toLowerCase()))
-               result.push(item);
+            result.push(item);
          });
 
          return result;
@@ -123,15 +130,13 @@ var local = {
       filter = newfilter;
       contexts.map(setState);
    },
-
-   // helper
    dateToString: function(date) {
-      var s = date.toString().split(" ");
-      return s[0] + " " + s[1] + " " + s[2] + ", " + s[4];
+      var s = date.toString().split("-");
+      return s[2][0] + s[2][1] + "/" + s[1] + "/" + s[0];
    },
    itemTotals: function(item) {
       return {
-         grand: Math.round(item.weight*item.priceCoastline*100)/100,
+         grand: Math.round(item.quantity*item.purchasePrice*100)/100,
       };
    },
    renderTabBar: function(context) {
@@ -179,52 +184,65 @@ var local = {
 
 export default local;
 
-for (var i = 0; i < 10; ++i) {
-   var name = ""
-   "AZAZAZAZAZAZAZAZAZAZAZAZAZAZAZ".split("").map(function(char) {
-      if (Math.random() > 0.9)
-         name += char;
-   });
-   fisher.available.push({
-      // fisher orders
-      name: name,
-      weight: Math.round(Math.random()*1000),
-      units: "lbs",
-      date: new Date(new Date() - Math.random()*1000000),
-      zone: "Test Area",
-
-      // product details
-      priceMarket: 999.99,
-      priceCoastline: Math.round(Math.random()*1000)/100,
-      feeLogistics: Math.round(Math.random()*5*200)/100,
-      taxRate: 0.13,
-
-      // reserved details
-      reserved: false,
-   });
+// socket
+if (window.navigator && Object.keys(window.navigator).length == 0) {
+   window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
 }
 
-for (var i = 0; i < 10; ++i) {
-   var name = ""
-   "TESTESTESTSETSETsetsetsetset".split("").map(function(char) {
-      if (Math.random() > 0.9)
-         name += char;
-   });
-   restaurant.available.push({
-      // fisher orders
-      name: name,
-      weight: Math.round(Math.random()*1000),
-      units: "lbs",
-      date: new Date(new Date() - Math.random()*1000000),
-      zone: "Test Area",
+var server = "10.16.20.16:8999";
+var io = require('socket.io-client/socket.io');
+var socket = io(server, {transports: ['websocket'], jsonp: false});
+var token = 333;
+socket.on("token", function() {
+   socket.emit("token", {token:token});
+});
+socket.on("data", function(data) {
+   console.log("DATA:", data);
 
-      // product details
-      priceMarket: 999.99,
-      priceCoastline: Math.round(Math.random()*1000)/100,
-      feeLogistics: Math.round(Math.random()*5*200)/100,
-      taxRate: 0.13,
+   switch (data.type) {
+      case "order":
+         data.items.map(function(item) {
+            var channel = (item.reserved && fisher.reserved) || fisher.available;
+            var i, len;
+            item.order = data.order;
 
-      // reserved details
-      reserved: false,
-   });
+            for (i = 0, len = channel.length; i < len; ++i) {
+               if (channel[i]._id == item._id)
+                  break;
+            }
+
+            if (i == len) {
+               channel.push(item);
+            }
+            else {
+               channel[i] = item;
+            }
+         });
+
+         contexts.map(setState);
+         return true;
+      default:
+         return false;
+   }
+});
+
+function testFilter(string, filter) {
+   for (var i = 0; i < string.length; ++i) {
+      var match = true;
+
+      for (var j = 0; j < filter.length; ++j) {
+         if (i + j >= string.length || string[i + j] != filter[j]) {
+            match = false;
+            break;
+         }
+      }
+
+      if (match) return true;
+   }
+
+   return false;
+}
+
+function setState(context) {
+   context.setState(context.state);
 }

@@ -25,7 +25,7 @@ export default class Restaurant extends Component {
       const { navigator } = this.context;
 
       return (
-         <ScrollableTabView renderTabBar={(context) => Coastline.renderTabBar(context)}>
+         <ScrollableTabView renderTabBar={(context) => Coastline.renderTabBar(context)} initialPage={this.props.tab || 0}>
             <ScrollView tabLabel='AVAILABLE'><AvailableOrders /></ScrollView>
             <ScrollView tabLabel='HISTORY'><OrderHistory /></ScrollView>
             <ScrollView tabLabel='CART'><Cart /></ScrollView>
