@@ -67,7 +67,7 @@ export default class ProductDetail extends Component {
                      <Button onPress={()=> {navigator.back()}} value="CANCEL" overrides= {{backgroundColor: '#B71C1C', textColor: '#FFF'}} raised={true}/>
                   </View>
                   <View style={{flexDirection: 'column', flex: 0.5}}>
-                     <Button value={this.state.product.reserved ? "REMOVE" : "ACCEPT"} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}
+                     <Button value={this.state.product.status == "reserved" ? "REMOVE" : "ACCEPT"} overrides= {{backgroundColor: '#1B5E20', textColor: '#FFF'}} raised={true}
                         onPress={() => {
                            Coastline.fisher.reserve(this.state.product);
                            navigator.back();

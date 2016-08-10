@@ -1,4 +1,10 @@
 export default {
+   load: {
+      initialRoute: true,
+      title: 'Loading',
+      component: require('./load.js').default,
+   },
+
    login: {
       title: 'Login',
       component:require('./scenes/Login').default,
@@ -15,7 +21,6 @@ export default {
    },
 
    fisher: {
-      initialRoute: true,
       title: 'Fisher Market',
       component: require('./scenes/Fisher').default,
       children: {

@@ -23,16 +23,9 @@ export default class Login extends Component {
 
 	login = () => {
 		const { navigator } = this.context;
-		console.log(this.state.email + " " + this.state.password);
-		AuthActions.login(this.state.email, this.state.password).then((accountClass) => {
-			if (accountClass == 'userSupplier') {
-				navigator.to('fisherorders');
-			} else if (accountClass == 'userPurchaser') {
-				navigator.to('restaurants');
-			} else {
-				console.log('Invalid credentials')
-			}
-		})
+		AuthActions.login(this.state.email, this.state.password).then((res) => {
+			navigator.to('load');
+		});
 	}
 
 	render() {

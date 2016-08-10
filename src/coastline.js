@@ -1,53 +1,51 @@
-/*{
-   // fisher orders
-   name: undefined,
-   weight: undefined,
-   units: "lbs",
-   date: undefined,
-   zone: undefined,
-
-   // product details
-   priceMarket: undefined,
-   priceCoastline: undefined,
-   feeLogistics: undefined,
-   taxRate: undefined,
-
-   // reserved details
-   reserved: undefined,
-}*/
-
 // render tab bar
 import React, { View, Text, TouchableOpacity } from 'react-native';
 import { COLOR } from 'react-native-material-design';
 import AppStore from './stores/AppStore';
 
 // local coastline
-var contexts = [];
-var filter = "";
-var fisher = {
+let contexts = [];
+let filter = "";
+let fisher = {
    available: [],
    reserved: [],
 };
-var restaurant = {
+let restaurant = {
    available: [],
    history: [],
    cart: [],
 };
-var local = {
+
+// socket
+if (window.navigator && Object.keys(window.navigator).length == 0) {
+   window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
+}
+
+let ip = "10.16.20.53";
+let baseUrl = "http://" + ip + ":9000";
+let server = ip + ":8999";
+let io = require('socket.io-client/socket.io');
+let socket = io(server, {transports: ['websocket'], jsonp: false});
+
+let local = {
+   token: undefined,
+   user: undefined,
+   accountClass: undefined,
+   init: function() {
+      socket.emit("handshake", {
+         token: local.token,
+         accountClass: local.accountClass,
+         location: {
+            latitude: 44.55,
+            longitude: -79.35,
+         },
+      });
+   },
    fisher: {
       getAvailable: function() {
-         var result = [];
+         let result = [];
 
          fisher.available.map(function(item) {
-            // temp code
-            if (typeof item.product === "undefined" || item.product == null) {
-               item.product = {
-                  name: item._id.slice(item._id.length - 5),
-                  sellingPrice: 99.99,
-                  purchasePrice: 99.99,
-               };
-            }
-
             if (testFilter(item.product.name.toLowerCase(), filter)) {
                result.push(item);
             }
@@ -60,18 +58,9 @@ var local = {
          return result;
       },
       getReserved: function() {
-         var result = [];
+         let result = [];
 
          fisher.reserved.map(function(item) {
-            // temp code
-            if (typeof item.product === "undefined" || item.product == null) {
-               item.product = {
-                  name: item._id.slice(item._id.length - 5),
-                  sellingPrice: 99.99,
-                  purchasePrice: 99.99,
-               };
-            }
-
             if (testFilter(item.product.name.toLowerCase(), filter)) {
                result.push(item);
             }
@@ -83,23 +72,16 @@ var local = {
 
          return result;
       },
-      reserve: function(product) {
-         var i;
-         if ((i = fisher.available.indexOf(product)) != -1) {
-            fisher.available.splice(i, 1);
-            fisher.reserved.push(product);
-         }
-         else if ((i = fisher.reserved.indexOf(product)) != -1) {
-            fisher.reserved.splice(i, 1);
-            fisher.available.push(product);
-         }
-
-         product.reserved = !product.reserved;
+      reserve: function(item) {
+         socket.emit("action", {
+            type: "reserve",
+            item: item._id,
+         });
       },
    },
    restaurant: {
       getAvailable: function() {
-         var result = [];
+         let result = [];
 
          restaurant.available.map(function(item) {
             result.push(item);
@@ -108,7 +90,7 @@ var local = {
          return result;
       },
       getHistory: function() {
-         var result = [];
+         let result = [];
 
          restaurant.history.map(function(item) {
             result.push(item);
@@ -139,13 +121,47 @@ var local = {
       contexts.map(setState);
    },
    dateToString: function(date) {
-      var s = date.toString().split("-");
+      let s = date.toString().split("-");
       return s[2][0] + s[2][1] + "/" + s[1] + "/" + s[0];
    },
    itemTotals: function(item) {
       return {
          grand: Math.round(item.quantity*item.purchasePrice*100)/100,
       };
+   },
+   apiRequest: function (url, method, body) {
+      return fetch(baseUrl + url, {
+         method: method,
+         headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(body)
+      }).then((res) => {
+         return res.json()
+      }).catch((error) => {
+         console.error(error);
+      });
+
+      // console.log('here');
+      // callback();
+   },
+   apiRequestWithToken: function (url, method, body) {
+      return store.get('token').then((value) => {
+         if (value) {
+            return fetch(baseUrl + url, {
+               method: method,
+               headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + value,
+               },
+               body: JSON.stringify(body)
+            }).then((res) => res.json()).catch((error) => {
+               console.error(error);
+            });
+         };
+      })
    },
    renderTabBar: function(context) {
       return (
@@ -187,58 +203,53 @@ var local = {
             }
          </View>
       );
-   }
+   },
 };
 
 export default local;
 
-// socket
-if (window.navigator && Object.keys(window.navigator).length == 0) {
-   window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
-}
-
-var server = "10.16.20.16:8999";
-var io = require('socket.io-client/socket.io');
-var socket = io(server, {transports: ['websocket'], jsonp: false});
-var token = 333;
-socket.on("token", function() {
-   socket.emit("token", {token:token});
+socket.on("connect", function() {
+   console.log("Connected");
+});
+socket.on("CoastlineError", function(message) {
+   console.log(message);
 });
 socket.on("data", function(data) {
-   console.log("DATA:", data);
+   console.log("data", data);
 
-   switch (data.type) {
-      case "order":
-         data.items.map(function(item) {
-            var channel = (item.reserved && fisher.reserved) || fisher.available;
-            var i, len;
-            item.order = data.order;
+   switch (local.accountClass) {
+      case "supplier":
+         fisher.available = [];
+         fisher.reserved = [];
 
-            for (i = 0, len = channel.length; i < len; ++i) {
-               if (channel[i]._id == item._id)
-                  break;
-            }
+         Object.keys(data.data).map(function(key) {
+            let item = data.data[key];
 
-            if (i == len) {
-               channel.push(item);
+            if (item.status == "pending") {
+               fisher.available.push(item);
             }
             else {
-               channel[i] = item;
+               if (item.supplier == local.user._id)
+                  fisher.reserved.push(item);
             }
          });
 
-         contexts.map(setState);
-         return true;
-      default:
-         return false;
+         break;
+      case "purchaser": break;
+      case "admin": break;
    }
+   contexts.map(setState);
+});
+
+socket.on("handshake", function(user) {
+   local.user = user;
 });
 
 function testFilter(string, filter) {
-   for (var i = 0; i < string.length; ++i) {
-      var match = true;
+   for (let i = 0; i < string.length; ++i) {
+      let match = true;
 
-      for (var j = 0; j < filter.length; ++j) {
+      for (let j = 0; j < filter.length; ++j) {
          if (i + j >= string.length || string[i + j] != filter[j]) {
             match = false;
             break;
