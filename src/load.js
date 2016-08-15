@@ -24,7 +24,7 @@ export default class Load extends Component {
 		const theme = AppStore.getState().theme;
 
       setTimeout(function() {
-         let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2E5Yjk5OTJmOWI3Zjg4NTM4MGZjMWQiLCJpYXQiOjE0NzA4MzQzMzgzNTMsImV4cCI6MTQ3MzQyNjMzODM1M30.Z7vL11Nnz6RDrMrNFfIv1u3nzJI0DGExB-H-mQV3UZ4";
+         let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2E5Yjk5OTJmOWI3Zjg4NTM4MGZjMWQiLCJpYXQiOjE0NzEyNTczNzkwMTIsImV4cCI6MTQ3Mzg0OTM3OTAxMn0.53_7etOrYUVnjsEGd1OGU9BvZj9jNOthYKAfD3GfGlc";
          let accountClass = "supplier";
 
          if (token && token != "") {

@@ -21,7 +21,7 @@ if (window.navigator && Object.keys(window.navigator).length == 0) {
    window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
 }
 
-let ip = "10.16.20.53";
+let ip = "10.16.20.14";
 let baseUrl = "http://" + ip + ":9000";
 let server = ip + ":8999";
 let io = require('socket.io-client/socket.io');
