@@ -52,12 +52,12 @@ export default class AvailableOrders extends Component {
                                        {member.name}
                                     </Text>
             								<Text style={{fontSize:16, flex:0.3, textAlign: 'right', fontWeight: '500'}}>
-                                       ${member.priceCoastline}/{member.units}
+                                       ${member.sellingPrice}/{"lb"}
                                     </Text>
             							</View>
             						</View>
-         							<Text>Caught {Coastline.dateToString(member.date)}</Text>
-         							<Text>Delivered from {member.zone}</Text>
+         							<Text>Caught {"{CAUGHT DATE}"}</Text>
+         							<Text>Delivered from {"{PICKUP}"}</Text>
          						</Card.Body>
          						<Card.Actions position="right">
          						   <Button value="ADD TO CART" primary={theme}  onPress={() => { navigator.forward('productdetail', undefined, {product: member}) }}/>

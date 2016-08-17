@@ -21,7 +21,7 @@ if (window.navigator && Object.keys(window.navigator).length == 0) {
    window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
 }
 
-let ip = "10.16.20.14";
+let ip = "10.16.20.92";
 let baseUrl = "http://" + ip + ":9000";
 let server = ip + ":8999";
 let io = require('socket.io-client/socket.io');
@@ -142,9 +142,6 @@ let local = {
       }).catch((error) => {
          console.error(error);
       });
-
-      // console.log('here');
-      // callback();
    },
    apiRequestWithToken: function (url, method, body) {
       return store.get('token').then((value) => {
@@ -215,29 +212,37 @@ socket.on("CoastlineError", function(message) {
    console.log(message);
 });
 socket.on("data", function(data) {
-   console.log("data", data);
+   fisher.available = [];
+   fisher.reserved = [];
+   restaurant.available = [];
+   restaurant.history = [];
 
-   switch (local.accountClass) {
-      case "supplier":
-         fisher.available = [];
-         fisher.reserved = [];
+   console.log(data);
 
-         Object.keys(data.data).map(function(key) {
-            let item = data.data[key];
+   data.items && Object.keys(data.items).map(function(key) {
+      let item = data.items[key];
 
-            if (item.status == "pending") {
-               fisher.available.push(item);
-            }
-            else {
-               if (item.supplier == local.user._id)
-                  fisher.reserved.push(item);
-            }
-         });
+      if (item.status == "pending") {
+         fisher.available.push(item);
+      }
+      else {
+         if (item.supplier == local.user._id)
+            fisher.reserved.push(item);
+      }
+   });
 
-         break;
-      case "purchaser": break;
-      case "admin": break;
-   }
+   data.orders && Object.keys(data.orders).map(function(key) {
+      let order = data.orders[key];
+
+      if (order.purchaser == local.user._id) {
+         restaurant.history.push(order);
+      }
+   });
+
+   data.products && Object.keys(data.products).map(function(key) {
+      restaurant.available.push(data.products[key]);
+   });
+
    contexts.map(setState);
 });
 

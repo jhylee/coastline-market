@@ -23,31 +23,29 @@ export default class Load extends Component {
       const { navigator } = this.context;
 		const theme = AppStore.getState().theme;
 
-      setTimeout(function() {
-         let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2E5Yjk5OTJmOWI3Zjg4NTM4MGZjMWQiLCJpYXQiOjE0NzEyNTczNzkwMTIsImV4cCI6MTQ3Mzg0OTM3OTAxMn0.53_7etOrYUVnjsEGd1OGU9BvZj9jNOthYKAfD3GfGlc";
-         let accountClass = "supplier";
+      console.log("freeze -2");
 
-         if (token && token != "") {
-            Coastline.token = token;
-            Coastline.accountClass = accountClass;
-            Coastline.init();
+      let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2E5Yjk5MDJmOWI3Zjg4NTM4MGZjMWMiLCJpYXQiOjE0NzE0NTU4MjQyNTQsImV4cCI6MTQ3NDA0NzgyNDI1NH0.xgOCWcwkZZ1KYlXLePyuPEcBMOLRXCkMbKHxoetLf2A";
+      let accountClass = "purchaser";
 
-            if (accountClass == "purchaser") {
-               navigator.to('restaurants');
-               return;
-            }
-            else if (accountClass == "supplier") {
-               navigator.to('fisher');
-               return;
-            }
-            else {
-               navigator.to('login');
-            }
+      if (token && token != "") {
+         Coastline.token = token;
+         Coastline.accountClass = accountClass;
+         Coastline.init();
+         
+         if (accountClass == "purchaser") {
+            navigator.to('restaurant');
+         }
+         else if (accountClass == "supplier") {
+            navigator.to('fisher');
          }
          else {
             navigator.to('login');
          }
-      }, 100);
+      }
+      else {
+         navigator.to('login');
+      }
 
 		return (
 			<View>
