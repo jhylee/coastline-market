@@ -21,7 +21,7 @@ if (window.navigator && Object.keys(window.navigator).length == 0) {
    window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
 }
 
-let ip = "10.16.20.92";
+let ip = "10.16.20.34";
 let baseUrl = "http://" + ip + ":9000";
 let server = ip + ":8999";
 let io = require('socket.io-client/socket.io');
@@ -234,7 +234,7 @@ socket.on("data", function(data) {
    data.orders && Object.keys(data.orders).map(function(key) {
       let order = data.orders[key];
 
-      if (order.purchaser == local.user._id) {
+      if (order.data.purchaser == local.user._id) {
          restaurant.history.push(order);
       }
    });
@@ -248,6 +248,11 @@ socket.on("data", function(data) {
 
 socket.on("handshake", function(user) {
    local.user = user;
+});
+
+socket.on("ping", function() {
+   socket.emit("pong");
+   console.log("ping");
 });
 
 function testFilter(string, filter) {

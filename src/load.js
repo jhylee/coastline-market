@@ -22,9 +22,7 @@ export default class Load extends Component {
 	render() {
       const { navigator } = this.context;
 		const theme = AppStore.getState().theme;
-
-      console.log("freeze -2");
-
+      
       let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1N2E5Yjk5MDJmOWI3Zjg4NTM4MGZjMWMiLCJpYXQiOjE0NzE0NTU4MjQyNTQsImV4cCI6MTQ3NDA0NzgyNDI1NH0.xgOCWcwkZZ1KYlXLePyuPEcBMOLRXCkMbKHxoetLf2A";
       let accountClass = "purchaser";
 
@@ -32,7 +30,7 @@ export default class Load extends Component {
          Coastline.token = token;
          Coastline.accountClass = accountClass;
          Coastline.init();
-         
+
          if (accountClass == "purchaser") {
             navigator.to('restaurant');
          }
