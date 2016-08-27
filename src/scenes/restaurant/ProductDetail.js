@@ -16,7 +16,9 @@ export default class AvailableOrders extends Component {
 			badgeThree: 9
 		};
 
-      this.state.product = props.product;
+      this.state.product = {};
+      this.state.product.date = new Date();
+      //this.state.product = props.product;
       this.state.product.weight = 0;
       this.state.product.grandTotal = 0;
 	}
@@ -44,7 +46,7 @@ export default class AvailableOrders extends Component {
    							<Text style={{fontSize:16, flex:0.3, textAlign: 'right', fontWeight: '500'}}>${this.state.product.priceCoastline}/{this.state.product.units}</Text>
    						</View>
    						<View style={styles.row}>
-   							<Text style={{fontSize:13, flex:0.5}}>Caught {Coastline.dateToString(this.state.product.date)}</Text>
+   							<Text style={{fontSize:13, flex:0.5}}>Caught {"date"}</Text>
    							<Text style={{fontSize:13, flex:0.5, textAlign: 'right'}}>{this.state.product.zone}</Text>
    						</View>
    					</View>
@@ -61,7 +63,7 @@ export default class AvailableOrders extends Component {
    							size={15}
    							/>
    							<Text style={{flex: 1.6, marginTop: 2, textAlign: 'left'}}>
-                           Delivery between {Coastline.dateToString(new Date((0 - this.state.product.deliveryTime) + this.state.product.deliveryTimeMin))} - {Coastline.dateToString(new Date((0 - this.state.product.deliveryTime) + this.state.product.deliveryTimeMax))}
+                           Delivery between {"delivery"}
                         </Text>
    					</View>
    				</View>

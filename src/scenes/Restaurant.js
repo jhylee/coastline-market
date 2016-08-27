@@ -18,6 +18,8 @@ export default class Restaurant extends Component {
 
    constructor(props) {
       super(props);
+      this.state = {};
+      this.state.scroll = 0;
    }
 
    render() {
@@ -25,11 +27,17 @@ export default class Restaurant extends Component {
       const { navigator } = this.context;
 
       return (
-         <ScrollableTabView renderTabBar={(context) => Coastline.renderTabBar(context)} initialPage={this.props.tab || 0}>
-            <ScrollView tabLabel='AVAILABLE'><AvailableOrders /></ScrollView>
-            <ScrollView tabLabel='HISTORY'><OrderHistory /></ScrollView>
-            <ScrollView tabLabel='CART'><Cart /></ScrollView>
-         </ScrollableTabView>
+            <ScrollableTabView
+               renderTabBar={(context) => Coastline.renderTabBar(context, this.state.scroll)}
+               initialPage={this.props.tab || 0}
+               onScroll={(float) => {
+                  this.state.scroll = float;
+                  this.setState(this.state);
+               }}>
+               <ScrollView tabLabel='AVAILABLE'><AvailableOrders /></ScrollView>
+               <ScrollView tabLabel='HISTORY'><OrderHistory /></ScrollView>
+               <ScrollView tabLabel='CART'><Cart /></ScrollView>
+            </ScrollableTabView>
       );
    }
 }

@@ -1,5 +1,15 @@
+/**
+ *
+ * TODO
+ *    Finish underlay on tabbar
+ *
+ * NOTE
+ *
+ */
+
+
 // render tab bar
-import React, { View, Text, TouchableOpacity } from 'react-native';
+import React, { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { COLOR } from 'react-native-material-design';
 import AppStore from './stores/AppStore';
 
@@ -21,16 +31,20 @@ if (window.navigator && Object.keys(window.navigator).length == 0) {
    window = Object.assign(window, { navigator: { userAgent: 'ReactNative' }});
 }
 
+// must use local ip when testing android
 let ip = "10.16.20.34";
 let baseUrl = "http://" + ip + ":9000";
 let server = ip + ":8999";
 let io = require('socket.io-client/socket.io');
-let socket = io(server, {transports: ['websocket'], jsonp: false});
+let socket = socket || io(server, {transports: ['websocket'], jsonp: false});
 
 let local = {
+   // client token
    token: undefined,
+   // client user object
    user: undefined,
    accountClass: undefined,
+   // client must complete a handshake
    init: function() {
       socket.emit("handshake", {
          token: local.token,
@@ -41,16 +55,19 @@ let local = {
          },
       });
    },
+   // aka supplier
    fisher: {
       getAvailable: function() {
          let result = [];
 
+         // apply filter then populate result
          fisher.available.map(function(item) {
             if (testFilter(item.product.name.toLowerCase(), filter)) {
                result.push(item);
             }
          });
 
+         // sort by newest first
          result.sort(function(a, b) {
             return new Date(b.order.date) - new Date(a.order.date);
          });
@@ -60,12 +77,14 @@ let local = {
       getReserved: function() {
          let result = [];
 
+         // apply filter then populate result
          fisher.reserved.map(function(item) {
             if (testFilter(item.product.name.toLowerCase(), filter)) {
                result.push(item);
             }
          });
 
+         // sort by newest first
          result.sort(function(a, b) {
             return new Date(b.order.date) - new Date(a.order.date);
          });
@@ -73,6 +92,7 @@ let local = {
          return result;
       },
       reserve: function(item) {
+         // submits a reserve action
          socket.emit("action", {
             type: "reserve",
             item: item._id,
@@ -102,6 +122,7 @@ let local = {
          return restaurant.cart;
       },
    },
+   // used to subscribe components to coastline object for updates
    addContext: function(context) {
       if (contexts.indexOf(context) == -1) {
          contexts.push(context);
@@ -109,6 +130,7 @@ let local = {
 
       return context;
    },
+   // remove contexts when they are no longer visible
    removeContext: function(context) {
       if (contexts.indexOf(context) != -1) {
          contexts.splice(contexts.indexOf(context), 1);
@@ -143,6 +165,7 @@ let local = {
          console.error(error);
       });
    },
+   // submit request with session token
    apiRequestWithToken: function (url, method, body) {
       return store.get('token').then((value) => {
          if (value) {
@@ -160,7 +183,10 @@ let local = {
          };
       })
    },
-   renderTabBar: function(context) {
+   // method called when rendering a scrollable tab bar
+   // copy over when building ios
+   // todo remove inline styles
+   renderTabBar: function(context, scroll) {
       return (
          <View
             style={{
@@ -169,10 +195,29 @@ let local = {
                flexWrap: 'wrap',
                alignItems: 'flex-start',
                flexDirection:'row',
-               backgroundColor: COLOR[AppStore.state.theme+""+500].color,
+               backgroundColor: "#eee",//COLOR[AppStore.state.theme+""+500].color,
             }}>
             {
                context.tabs.map(function(tab, i) {
+                  // Attempting to build an underlay bar that follow the active
+                  // tab. Left/right: pixels from those sides.
+                  let dif, left = 0, right = 0, width = 0;
+                  let tabWidth = Dimensions.get('window').width/context.tabs.length;
+
+                  if (i + 1 == context.activeTab) { // tab is left of active
+                     width = (scroll - i)*tabWidth;
+                     left = tabWidth - width;
+                  }
+                  else if (i == context.activeTab) { // tab is active
+                     width = tabWidth;
+                  }
+                  else if (i - 1 == context.activeTab) { // tab is right of active
+                     width = (i - scroll)*tabWidth;
+                     right = tabWidth - width;
+                  }
+
+                  console.log("WIDTH " + i, width);
+
                   return (
                      <TouchableOpacity
                         style={{
@@ -182,6 +227,7 @@ let local = {
                            borderBottomColor: '#fff',
                            borderBottomWidth: (context.activeTab == i ? 3 : 0),
                         }}
+                        // touch tab bar go to page
                         onPress={() => {
                            context.goToPage(i);
                         }}>
@@ -191,9 +237,18 @@ let local = {
                               textAlign: "center",
                               color: "#fff",
                            }}>
-
                            {tab}
                         </Text>
+                        <View style={{
+                           backgroundColor: "#000",
+                           height: 10,
+                           width: width,
+                           marginLeft: left,
+                           marginRight: right,
+                        }}
+                           >
+
+                        </View>
                      </TouchableOpacity>
                   )
                })
@@ -211,7 +266,10 @@ socket.on("connect", function() {
 socket.on("CoastlineError", function(message) {
    console.log(message);
 });
+// Currently the full data object is passed to client, so update everything
+// upon receiving data.
 socket.on("data", function(data) {
+   // Set to empty, server keeps state so nothing is lost
    fisher.available = [];
    fisher.reserved = [];
    restaurant.available = [];
@@ -219,6 +277,7 @@ socket.on("data", function(data) {
 
    console.log(data);
 
+   // If items exist in the packet, update available/reserved based on type
    data.items && Object.keys(data.items).map(function(key) {
       let item = data.items[key];
 
@@ -231,6 +290,7 @@ socket.on("data", function(data) {
       }
    });
 
+   // Fill order object, if order was placed by this account then add to history
    data.orders && Object.keys(data.orders).map(function(key) {
       let order = data.orders[key];
 
@@ -239,10 +299,12 @@ socket.on("data", function(data) {
       }
    });
 
+   // Fill all products
    data.products && Object.keys(data.products).map(function(key) {
       restaurant.available.push(data.products[key]);
    });
 
+   // Update all contexts
    contexts.map(setState);
 });
 
@@ -250,11 +312,8 @@ socket.on("handshake", function(user) {
    local.user = user;
 });
 
-socket.on("ping", function() {
-   socket.emit("pong");
-   console.log("ping");
-});
-
+// See if filter is substring of string, if so return true. Likely changing in
+// future.
 function testFilter(string, filter) {
    for (let i = 0; i < string.length; ++i) {
       let match = true;
@@ -272,6 +331,7 @@ function testFilter(string, filter) {
    return false;
 }
 
+// Update a single context with new data
 function setState(context) {
    context.setState(context.state);
 }
