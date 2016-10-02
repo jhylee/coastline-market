@@ -32,7 +32,8 @@ if (window.navigator && Object.keys(window.navigator).length == 0) {
 }
 
 // must use local ip when testing android
-let ip = "10.16.20.34";
+// let ip = "192.168.1.72"
+let ip = "localhost"
 let baseUrl = "http://" + ip + ":9000";
 let server = ip + ":8999";
 let io = require('socket.io-client/socket.io');
@@ -185,7 +186,7 @@ let local = {
    },
    // method called when rendering a scrollable tab bar
    // copy over when building ios
-   // todo remove inline styles
+   // TODO remove inline styles
    renderTabBar: function(context, scroll) {
       return (
          <View
@@ -195,7 +196,7 @@ let local = {
                flexWrap: 'wrap',
                alignItems: 'flex-start',
                flexDirection:'row',
-               backgroundColor: "#eee",//COLOR[AppStore.state.theme+""+500].color,
+               backgroundColor: COLOR[AppStore.state.theme+""+500].color,
             }}>
             {
                context.tabs.map(function(tab, i) {
@@ -203,6 +204,7 @@ let local = {
                   // tab. Left/right: pixels from those sides.
                   let dif, left = 0, right = 0, width = 0;
                   let tabWidth = Dimensions.get('window').width/context.tabs.length;
+                  // let tabWidth = Dimensions.get('window')/3
 
                   if (i + 1 == context.activeTab) { // tab is left of active
                      width = (scroll - i)*tabWidth;
@@ -241,7 +243,7 @@ let local = {
                         </Text>
                         <View style={{
                            backgroundColor: "#000",
-                           height: 10,
+                           height: 0,
                            width: width,
                            marginLeft: left,
                            marginRight: right,

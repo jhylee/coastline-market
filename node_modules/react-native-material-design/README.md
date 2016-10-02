@@ -13,6 +13,13 @@ many bug fixes, extra components, backward compatibility to Android SDK API 16 a
 
 > Please keep in mind this is still a work in progress. The master branch is subject to breaking changes.
 
+---
+
+### Looking for maintainers 
+We're not working on any react-native projects internally so this has become low priority for now so we'd like to open this up to some more maintainers. If you're interested please get in touch via [gitter](https://gitter.im/react-native-material-design/react-native-material-design), or contact [myself](https://twitter.com/mike.diarmid) or [@ehesp](https://twitter.com/elliothesp) via twitter.
+
+---
+
 Looking for a demo app? [Check out the repo](https://github.com/react-native-material-design/demo-app).
 
 Or view it online [here](https://appetize.io/app/hyp1m20y515c16cj5yw2karcjg)! (Credits to Appetize for free hosting).
@@ -23,9 +30,13 @@ Or view it online [here](https://appetize.io/app/hyp1m20y515c16cj5yw2karcjg)! (C
 npm i react-native-material-design --save
 ```
 
-Copy the `MaterialIcons` font file from [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons#android) to your local working directory:
+Follow the [Android installation instructions](https://github.com/oblador/react-native-vector-icons#android) on the [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) library, which consists of adding the following to your `./android/app/build.gradle`:
 
-`./node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf` -> `./android/app/src/main/assets/fonts`.
+```gradle
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+```
+
+_Note: It's possible that the instructions on the react-native-vector-icons page differ from what is above. If that's the case, follow those instructions, and please file an issue with us to update it here._
 
 Import any required components into your project, for example:
 

@@ -11,7 +11,7 @@ export default class Checkbox extends Component {
     static propTypes = {
         label: PropTypes.string,
         theme: PropTypes.oneOf(THEME_NAME),
-        primary: PropTypes.oneOf(PRIMARY_COLORS),
+        primary: PropTypes.oneOfType([PropTypes.oneOf(PRIMARY_COLORS), PropTypes.string]),
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         checked: PropTypes.bool,
         disabled: PropTypes.bool,
@@ -40,12 +40,12 @@ export default class Checkbox extends Component {
         const colorMap = {
             light: {
                 disabled: '#000000',
-                checked: COLOR[`${primary}500`].color,
+                checked: (COLOR[`${primary}500`] || {}).color || primary,
                 default: '#000000'
             },
             dark: {
                 disabled: '#ffffff',
-                checked: COLOR[`${primary}500`].color,
+                checked: (COLOR[`${primary}500`] || {}).color || primary,
                 default: '#ffffff'
             }
         };
@@ -101,7 +101,9 @@ export default class Checkbox extends Component {
                         />
                     </IconToggle>
                     <View
-                        style={styles.labelContainer}
+                        style={{alignItems: 'center',
+                              flexDirection: 'row',
+                            	flex: 1}}
                         onPress={() => onCheck(!checked, value)}
                     >
                         <Text
@@ -132,6 +134,11 @@ const styles = StyleSheet.create({
     label: {
         marginLeft: 16,
         opacity: COLOR.darkPrimaryOpacity.opacity,
+        alignItems: 'center',
         flex: 1
+    },
+    labelContainer :{
+        justifyContent: 'center',
+        flexDirection:'row'
     }
 });

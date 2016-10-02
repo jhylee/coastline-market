@@ -2,172 +2,172 @@
 <items version="2" >
 
     <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.17.1/jars/libs/infer-annotations-1.5.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="0b5e946b76cdb1f00b18f2981e7d997141a66c9f">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/infer-annotations-1.5-05517eaf18553fc8e5385937eacc0046d8d693dd.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.1.4/129874135e6081269ace2312092031558865de12/bolts-android-1.1.4.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="129874135e6081269ace2312092031558865de12">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-641aebad6ff064b6166edee93590ceb36058cb5b.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/commons-cli/commons-cli/1.2/2bf96b7aa8b611c177d329452af1dc933e14501c/commons-cli-1.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/commons-cli-1.2-a522cf7b92c778aef699143e2fd543c0ebc7986d.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-5393433db7ec22de9e966da4e771b0b3565aaa11.jar" />
-    </item>
-    <item
-        jar="/usr/local/Cellar/android-sdk/24.4.1_1/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-51eb24e91ddbee4e2b0a209158e2ad356590715c.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.8.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3836ecca4e31e18ea8fbae8e822d49777b0db4f7">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-e9472b1b33456b7c71b700411f6900d308f491cc.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-f0246843123163dddef00723c1f6bc0f57909857.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/library-2.4.0-76022d6765918759b1d00ed86031007a5e5bb853.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.facebook.stetho/stetho/1.2.0/1d6cdb8ce8185b8b23213fad48a83987fb6d2d67/stetho-1.2.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1d6cdb8ce8185b8b23213fad48a83987fb6d2d67">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/stetho-1.2.0-9bea4318f894848a60acd90505f94512373d6b72.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/DemoApp/react-native-splashscreen/unspecified/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="15bb365e4691f9cc227a5589c21dae82acba03ca">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-54ca603823908f81f34cc86c1f984145e645356a.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/0.8.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="845a5b3a624946b2068963ba656c117fc453701c">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-1a7395798b9e4e0c719c593ef3b181987aaaa7e7.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.2.3/1a0113da2cab5f4c216b4e5e7c1dbfaa67087e14/jackson-core-2.2.3.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1a0113da2cab5f4c216b4e5e7c1dbfaa67087e14">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/jackson-core-2.2.3-e2da3747231dcebb6e183609b655e392fc9ac85c.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.facebook.stetho/stetho-okhttp/1.2.0/6c5c9380e245c4ff5be2b2a49dcbb0200c39798e/stetho-okhttp-1.2.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="6c5c9380e245c4ff5be2b2a49dcbb0200c39798e">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/stetho-okhttp-1.2.0-2b2de5f3743483c6026655518aaa87f1e5e45b0a.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.5.0/4de2b4ed3445c37ec1720a7d214712e845a24636/okhttp-2.5.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/okhttp-2.5.0-45975fff3d406086fe9ee277d9cbcc686d149208.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0-ecea98cdcabb6852cfd856a76b2aafe61d60daf8.jar" />
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0-5b5c4879b0baa375dafc34acd23dd0fb8dc6d7bc.jar" />
     </item>
     <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.8.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4af24c040b21980e0a80a505816c648e36705bd9">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-d39d1c97e26a394294453739b4f68cd284328650.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/0.8.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="9178570a3a28c95fabd3bc746cd68efe99ad2b47">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-48c3135a41a7b3bcb6dcd4fe21efa4e17988e8cf.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/DemoApp/react-native-android-statusbar/unspecified/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="ec9d7804fc64325843c1bc2c4984ae217b57746a">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-bd75e614df6fec0d75b559f5c285f07607aa69de.jar" />
-    </item>
-    <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-ws/2.5.0/e9753b7dcae5deca92e871c5c759067070b07bc/okhttp-ws-2.5.0.jar"
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-ws/2.5.0/e9753b7dcae5deca92e871c5c759067070b07bc/okhttp-ws-2.5.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="0e9753b7dcae5deca92e871c5c759067070b07bc">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/okhttp-ws-2.5.0-a01ba0de83a3bac39f7c7bbc81f788c9ee755630.jar" />
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/okhttp-ws-2.5.0-1008bafbd1132afa81cb321622ab760175fccf69.jar" />
     </item>
     <item
-        jar="/Users/matt/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="98476622f10715998eacf9240d6b479f12c66143">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/okio-1.6.0-d7d5208c6c2a16be689718ce657d01d80aff7957.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-1f82007a1ec95d8a295959a1743a3b9243e1f1f0.jar" />
-    </item>
-    <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-faf992240a1a9bf017fefc4776eb707449565cac.jar" />
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-ab43dc12df2a12bea4ea0a7b992c8b9bfa882e58.jar" />
     </item>
     <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.17.1/jars/classes.jar"
+        jar="/Users/josephlee/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-9924bfa1477c34865b012df3f632a731f3fdd98d.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-75f548b8bbabb6cb7ff631ff60e91c5c4f042b7e.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/DemoApp/react-native-splashscreen/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="df089809c8d1b0feb05de14ff8dd4bccd3e43cf1">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-4ebac4b1b5118aa38834128eac1e2dfd52fa265d.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.5.0/4de2b4ed3445c37ec1720a7d214712e845a24636/okhttp-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/okhttp-2.5.0-1354cbea17c82bead5894aed389d418d3894224e.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/0.8.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="845a5b3a624946b2068963ba656c117fc453701c">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-c90bff116b025f0624da4987680c605c5efea7e6.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/okio-1.6.0-16454c4265fb446aa62ed61244e0f87fbca0c692.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.17.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="9686d4e1f88cf0c23f450f45d914d45d366711c5">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-8028743b869698ff79670ea4325bc7e596541233.jar" />
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-db469f9c9dd2461ccbd9ef3cbda31edcb5fa465b.jar" />
     </item>
     <item
-        jar="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp/0.8.1/jars/classes.jar"
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.17.1/jars/libs/infer-annotations-1.5.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0b5e946b76cdb1f00b18f2981e7d997141a66c9f">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/infer-annotations-1.5-fa7f30fb8156016ed32343f7717a2fe1a0ecfa5d.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/DemoApp/react-native-android-statusbar/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="480a298c89ca38ecd28c183940ea84164ce14175">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-6dec51927dc513f006cbb4906166df619534e2fa.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/library-2.4.0-85beaa0fed72d1d4b7ea6eea55a8840afba476f8.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp/0.8.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="0d5d69b03cb7d68b81543f6483ed04ccb0e2235b">
-        <dex dex="/Users/matt/Documents/coastline/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-edb2ec8f25a0245c029d0151b87a7c27dcfb38b0.jar" />
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-02a6436b26e107d30d37ff4b96d53e2d500c51d1.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.8.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3836ecca4e31e18ea8fbae8e822d49777b0db4f7">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-e29543e24c029c81554d8034895e8e2d83ff7730.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-3c6e34d31bfed2c8cf247de87fe6798324583ad2.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-fd32ccdfb3302a8344d5cdc1f014ac61cefb360d.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.facebook.stetho/stetho-okhttp/1.2.0/6c5c9380e245c4ff5be2b2a49dcbb0200c39798e/stetho-okhttp-1.2.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6c5c9380e245c4ff5be2b2a49dcbb0200c39798e">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/stetho-okhttp-1.2.0-5747f7984dcef00a8eeb8c1d16056101a8af0af4.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.8.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4af24c040b21980e0a80a505816c648e36705bd9">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-70d387152ed4acda4372edd0db0ec1f6ea7f15c5.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.facebook.stetho/stetho/1.2.0/1d6cdb8ce8185b8b23213fad48a83987fb6d2d67/stetho-1.2.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1d6cdb8ce8185b8b23213fad48a83987fb6d2d67">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/stetho-1.2.0-6fd3f59bd6dc3da6bd36fd28c68ac3f14731ca23.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.1.4/129874135e6081269ace2312092031558865de12/bolts-android-1.1.4.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-500eba3a2d7855237d3c081988a4d1804698b932.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.2.3/1a0113da2cab5f4c216b4e5e7c1dbfaa67087e14/jackson-core-2.2.3.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1a0113da2cab5f4c216b4e5e7c1dbfaa67087e14">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/jackson-core-2.2.3-ec47c2638320ebb3b229aecb3083772b6e204549.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/.gradle/caches/modules-2/files-2.1/commons-cli/commons-cli/1.2/2bf96b7aa8b611c177d329452af1dc933e14501c/commons-cli-1.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/commons-cli-1.2-aab4138dceed9d9b3f2cee8e816d34bfe4fbc222.jar" />
+    </item>
+    <item
+        jar="/Users/josephlee/coastline-market/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/0.8.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="9178570a3a28c95fabd3bc746cd68efe99ad2b47">
+        <dex dex="/Users/josephlee/coastline-market/android/app/build/intermediates/pre-dexed/debug/classes-8b34906d15d607c7fdc249a05fa18e5a8b885562.jar" />
     </item>
 
 </items>
